@@ -19,3 +19,18 @@ exports.validateRegister = [
     },
 ]
 
+exports.validateLogin = [
+    check('username', 'username does not Empty').not().isEmpty(),
+    check('username', 'Name length should be 3 to 20 characters')
+        .isLength({ min: 3, max: 20 }),
+    check('password', 'Password does not Empty').not().isEmpty(),
+    check('password', 'Password length min should be 8 characters')
+        .isLength({ min: 8 }),
+    (req, res, next) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty())
+            return res.status(422).json({ errors: errors.array() });
+        next();
+    },
+]
+
