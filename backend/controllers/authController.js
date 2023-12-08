@@ -29,6 +29,17 @@ exports.Register = async (req, res) => {
     await attachPerm(user, userPerm);
 
     res.status(201).json({ message: "Successfully Registered" });
+}
 
+exports.Login = async (req, res) => {
+    const { username, password } = req.body;
+    const user = await Auth.get({ username });
+    const is_authenticated = await Auth.authenticate(username, password);
+    if (!user || !is_authenticated) {
+        res.status(401).json({ error: "Invalid username or password" });
+        return;
+    }
+    const responseToken = Auth.generateToken(user);
+    res.json({ message: "Login Successfull", responseToken });
 }
 
