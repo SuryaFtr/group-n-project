@@ -20,21 +20,31 @@ const LoginForm = () => {
                 username,
                 password,
             });
+
             const token = response.data.data;
             localStorage.setItem('token', token);
             console.log('Login successful', response.data);
             showAlert('success', 'Successfully log in', '');
             navigate('/homepage');
         } catch (error) {
+            if (error.response && error.response.status === 422 && error.response.data.errors) {
+                
+                const validationErrors = error.response.data.errors;
+
+               
+                const errorMessage = validationErrors.map((error) => `<b>${error.param}</b>: ${error.msg}`).join('<br>');
+                showAlert('error', 'Login Failed', errorMessage);
+            } else {
+                showAlert('error', 'Login Failed', `<b>[CODE] </b><br>An error occurred during login. Please try again later`);
+            }
             console.error('Login error', error.message);
-            showAlert('error', 'Login Failed', `<b>[CODE] ${error.code}</b><br>Please check your username and password`);
         }
     };
 
     return (
         <Card style={{ textAlign: 'center', margin: '90px auto', padding: '30px', maxWidth: '400px', color: '#265073', fontWeight: 'bold', borderRadius: '15px', boxShadow: '0 8px 11px rgba(0, 0.2, 0.3, 0.4)' }}>
             <Typography variant="h4" gutterBottom style={{ marginBottom: '20px' }}>
-                Login
+                LOGIN
             </Typography>
             <TextField
                 label="Username"
