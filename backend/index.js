@@ -1,5 +1,4 @@
 const express = require('express')
-const cors = require('cors');
 const app = express()
 
 const applyMiddleware = require('./middleware')
@@ -11,8 +10,6 @@ const eventrouter = require('./routes/event')
 
 require('dotenv').config()
 const PORT = process.env.PORT || 3000
-
-app.use(cors());
 
 const mongoose = require('mongoose')
 mongoose
