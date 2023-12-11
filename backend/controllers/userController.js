@@ -1,7 +1,12 @@
+const Auth = require('../models/Auth');
+const { PermissionMongo, UserMongo } = require('../models/User');
+const { attachPerm, detachPerm } = require('../models/permissions_utils');
 
+exports.getUserProfile = async (req, res) => {
+    let query = { username: req.user.username };
 
-exports.getUserById = async (req, res) => {
-    res.send('Hello, this is getUserById!');
+    const user = await UserMongo.findOne(query);
+    res.status(200).json(user);
 }
 
 exports.updateUserData = async (req, res) => {
@@ -10,6 +15,19 @@ exports.updateUserData = async (req, res) => {
 
 exports.updateUserPassword = async (req, res) => {
     res.send('Hello, this is updateUserPassword!');
+}
+
+exports.getUserById = async (req, res) => {
+    const { id } = req.params;
+
+    const getById = await UserMongo.findOne({ _id: id });
+
+    if (!getById) {
+        res.status(401).json({ error: "User is Not Found" });
+        return;
+    }
+
+    res.status(200).json(getById);
 }
 
 exports.updateUserRole = async (req, res) => {
