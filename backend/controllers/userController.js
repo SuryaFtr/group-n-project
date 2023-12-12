@@ -30,8 +30,49 @@ exports.getUserById = async (req, res) => {
     res.status(200).json(getById);
 }
 
-exports.updateUserRole = async (req, res) => {
-    res.send('Hello, this is updateUserRole!');
+exports.addUserRole = async (req, res) => {
+    const { id } = req.params;
+    const { permissions } = req.body;
+
+    const getById = await UserMongo.findOne({ _id: id });
+
+    if (!getById) {
+        res.status(401).json({ error: "User is Not Found" });
+        return;
+    }
+
+    const user = getById;
+    const perm = await PermissionMongo.findOne({ name: permissions });
+
+    if (!perm) {
+        res.status(401).json({ error: "Role is not found" });
+        return;
+    }
+
+    await attachPerm(user, perm);
+    res.json({ message: "Add User Role Success" });
+}
+
+exports.removeUserRole = async (req, res) => {
+    const { id } = req.params;
+    const { permissions } = req.body;
+
+    const getById = await UserMongo.findOne({ _id: id });
+
+    if (!getById) {
+        res.status(401).json({ error: "User is Not Found" });
+        return;
+    }
+
+    const user = getById;
+    const perm = await PermissionMongo.findOne({ name: permissions });
+
+    if (!perm) {
+        res.status(401).json({ error: "Role is not found" });
+        return;
+    }
+    await detachPerm(user, perm);
+    res.json({ message: "Remove User Role Success" });
 }
 
 exports.getAllUser = async (req, res) => {

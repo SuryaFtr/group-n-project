@@ -3,7 +3,7 @@ const { check, validationResult } = require('express-validator');
 exports.validateRegister = [
     check('email', 'Invalid email')
         .isEmail(),
-    check('username', 'username does not Empty').not().isEmpty(),
+    check('username', 'Username can not be empty').not().isEmpty(),
     check('username', 'Name length should be 3 to 20 characters')
         .isLength({ min: 3, max: 20 }),
     check('password', 'Password does not Empty').not().isEmpty(),
@@ -20,12 +20,22 @@ exports.validateRegister = [
 ]
 
 exports.validateLogin = [
-    check('username', 'username does not Empty').not().isEmpty(),
+    check('username', 'Username can not be empty').not().isEmpty(),
     check('username', 'Name length should be 3 to 20 characters')
         .isLength({ min: 3, max: 20 }),
-    check('password', 'Password does not Empty').not().isEmpty(),
+    check('password', 'Password can not be empty').not().isEmpty(),
     check('password', 'Password length min should be 8 characters')
         .isLength({ min: 8 }),
+    (req, res, next) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty())
+            return res.status(422).json({ errors: errors.array() });
+        next();
+    },
+]
+
+exports.validateUpdateUserRole = [
+    check('permissions', 'Permission can not be empty').not().isEmpty(),
     (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty())
