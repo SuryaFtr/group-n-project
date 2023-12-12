@@ -3,11 +3,13 @@ const permission = require("../permissions");
 const { Router } = require("express");
 const router = Router();
 
+const { validateUpdateUserRole, validateUpdateUserData } = require('../middleware/validator');
+
 
 //get user profile (admin, staff & member) 
 router.get("/profile", permission.is_authenticated, userController.getUserProfile);
 //update user data (admin, staff & member) 
-router.put("/:id", permission.is_authenticated, userController.updateUserData);
+router.put("/profile", permission.is_authenticated, validateUpdateUserData, userController.updateUserData);
 //update user password (admin, staff & member) 
 router.put("/update-password/:id", permission.is_authenticated, userController.updateUserPassword);
 
@@ -15,8 +17,10 @@ router.put("/update-password/:id", permission.is_authenticated, userController.u
 router.get("", permission.is_admin, userController.getAllUser);
 //get user by id (admin) 
 router.get("/:id", permission.is_admin, userController.getUserById);
+//update user data (admin) 
+router.put("/:id", permission.is_authenticated, validateUpdateUserData, userController.updateUserDataByAdmin);
 //update user role (admin)
-router.put("/add-role/:id", permission.is_admin, userController.addUserRole);
+router.put("/add-role/:id", permission.is_admin, validateUpdateUserRole, userController.addUserRole);
 //remove user role (admin)
 router.put("/remove-role/:id", permission.is_admin, userController.removeUserRole);
 //delete user (admin)
