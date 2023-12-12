@@ -25,16 +25,12 @@ class Auth {
         const expireAt = Math.floor(Date.now() / 1000) + (60 * 60); // 60 mins
         const refreshExpireAt = Math.floor(new Date().setDate(new Date().getDate() + 7)); // 7 days
         const accesToken = jwt.sign({
-            email: user.email,
-            username: user.username,
-            permissions: user.permissions[0].name,
+            _id: user._id,
             exp: expireAt,
             iat: Math.floor(Date.now())
         }, process.env.SECRET);
         const refreshToken = jwt.sign({
-            email: user.email,
-            username: user.username,
-            permissions: user.permissions[0].name,
+            _id: user._id,
             iat: Math.floor(Date.now()),
             exp: refreshExpireAt,
 
@@ -43,8 +39,8 @@ class Auth {
     }
     static async parseToken(token, options) {
         const decoded = jwt.verify(token, process.env.SECRET);
-        const { username } = decoded; // throw error if invalid
-        return await this.get_without_password({ username }, options); // == { id:1, iat: 123123123 , exp: 123123123 }
+        const { _id } = decoded; // throw error if invalid
+        return await this.get_without_password({ _id }, options); // == { id:1, iat: 123123123 , exp: 123123123 }
     }
     static async parseTokenSafe(token, options) {
         try {

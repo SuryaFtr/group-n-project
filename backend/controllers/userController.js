@@ -3,14 +3,85 @@ const { PermissionMongo, UserMongo } = require('../models/User');
 const { attachPerm, detachPerm } = require('../models/permissions_utils');
 
 exports.getUserProfile = async (req, res) => {
-    let query = { username: req.user.username };
+    let query = { _id: req.user._id };
 
-    const user = await UserMongo.findOne(query);
+    const user = await UserMongo.findOne(query).select("-password").select("-__v");
     res.status(200).json(user);
 }
 
 exports.updateUserData = async (req, res) => {
-    res.send('Hello, this is updateUserData!');
+    const {
+        email,
+        username,
+        pictureLink,
+        firstName,
+        lastName,
+        phone,
+        address,
+        profession
+    } = req.body;
+
+    const id = req.user._id;
+    let query = { _id: id };
+
+    const filter = await UserMongo.findOne(query);
+
+    if (!filter) {
+        res.status(401).json({ error: "User is Not Found" });
+        return;
+    }
+
+    let UpdateRequest = {}
+
+    const checkEmail = await Auth.get({ email })
+    const checkUsername = await Auth.get({ username })
+
+    if (checkUsername && checkEmail) {
+        UpdateRequest = {
+            pictureLink,
+            firstName,
+            lastName,
+            phone,
+            address,
+            profession
+        }
+    }
+
+    else if (!checkUsername || !checkEmail) {
+        if (checkUsername && !checkEmail) {
+            if (checkEmail) {
+                res.status(400).json({ error: "Email already registered" });
+                return;
+            }
+
+        }
+
+        if (!checkUsername && checkEmail) {
+            if (checkUsername) {
+                res.status(400).json({ error: "Username already exists" });
+                return;
+            }
+        }
+
+        UpdateRequest = {
+            email,
+            username,
+            pictureLink,
+            firstName,
+            lastName,
+            phone,
+            address,
+            profession
+        }
+    }
+
+    if (filter) {
+        const update = await UserMongo.updateOne({ _id: id }, { $set: UpdateRequest });
+        res.status(201).json({ message: "Successfully Updated" });
+    } else {
+        res.status(401).json({ error: "Error occured during update process" });
+        return;
+    }
 }
 
 exports.updateUserPassword = async (req, res) => {
@@ -18,7 +89,7 @@ exports.updateUserPassword = async (req, res) => {
 }
 
 exports.getAllUser = async (req, res) => {
-    const user = await UserMongo.find().populate("permissions").select("-password");
+    const user = await UserMongo.find().populate("permissions").select("-password").select("-__v");
 
     res.status(200).json(user);
 }
@@ -26,7 +97,7 @@ exports.getAllUser = async (req, res) => {
 exports.getUserById = async (req, res) => {
     const { id } = req.params;
 
-    const getById = await UserMongo.findOne({ _id: id });
+    const getById = await UserMongo.findOne({ _id: id }).select("-password").select("-__v");
 
     if (!getById) {
         res.status(401).json({ error: "User is Not Found" });
@@ -34,6 +105,67 @@ exports.getUserById = async (req, res) => {
     }
 
     res.status(200).json(getById);
+}
+
+exports.updateUserDataByAdmin = async (req, res) => {
+    const {
+        email,
+        username,
+        pictureLink,
+        firstName,
+        lastName,
+        phone,
+        address,
+        profession
+    } = req.body;
+
+    const { id } = req.params;
+    let query = { _id: id };
+
+    const filter = await UserMongo.findOne(query);
+
+    if (!filter) {
+        res.status(401).json({ error: "User is Not Found" });
+        return;
+    }
+
+    let UpdateRequest = {}
+
+    const checkEmail = await Auth.get({ email })
+    const checkUsername = await Auth.get({ username })
+
+    if (checkEmail && checkUsername) {
+        UpdateRequest = {
+            pictureLink,
+            firstName,
+            lastName,
+            phone,
+            address,
+            profession
+        }
+    }
+
+    else if (!checkEmail || !checkUsername) {
+
+        UpdateRequest = {
+            email,
+            username,
+            pictureLink,
+            firstName,
+            lastName,
+            phone,
+            address,
+            profession
+        }
+    }
+
+    if (filter) {
+        const update = await UserMongo.updateOne({ _id: id }, { $set: UpdateRequest });
+        res.status(201).json({ message: "Successfully Updated" });
+    } else {
+        res.status(401).json({ error: "Error occured during update process" });
+        return;
+    }
 }
 
 exports.addUserRole = async (req, res) => {
