@@ -11,14 +11,14 @@ router.put("/:id", permission.is_authenticated, userController.updateUserData);
 //update user password (admin, staff & member) 
 router.put("/update-password/:id", permission.is_authenticated, userController.updateUserPassword);
 
+//get all user (admin)
+router.get("", permission.is_admin, userController.getAllUser);
 //get user by id (admin) 
 router.get("/:id", permission.is_admin, userController.getUserById);
 //update user role (admin)
 router.put("/add-role/:id", permission.is_admin, userController.addUserRole);
 //remove user role (admin)
 router.put("/remove-role/:id", permission.is_admin, userController.removeUserRole);
-//get all user (admin)
-router.get("/", permission.is_admin, userController.getAllUser);
 //delete user (admin)
 router.delete("/:id", permission.is_admin, userController.deleteUser);
 

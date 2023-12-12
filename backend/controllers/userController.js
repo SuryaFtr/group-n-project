@@ -17,6 +17,12 @@ exports.updateUserPassword = async (req, res) => {
     res.send('Hello, this is updateUserPassword!');
 }
 
+exports.getAllUser = async (req, res) => {
+    const user = await UserMongo.find().populate("permissions").select("-password");
+
+    res.status(200).json(user);
+}
+
 exports.getUserById = async (req, res) => {
     const { id } = req.params;
 
@@ -73,10 +79,6 @@ exports.removeUserRole = async (req, res) => {
     }
     await detachPerm(user, perm);
     res.json({ message: "Remove User Role Success" });
-}
-
-exports.getAllUser = async (req, res) => {
-    res.send('Hello, this is getAllUser!');
 }
 
 exports.deleteUser = async (req, res) => {
