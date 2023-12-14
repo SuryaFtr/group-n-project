@@ -1,13 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import '../../styles/Main.css';
+import Logo from '../../assets/Logo BOL - Text.png';
+import seaImage from '../../assets/Undersea.jpg';
+import beachImage from '../../assets/Beach.jpg';
 import oneLogo from '../../assets/Ekosistem.png';
 import twoLogo from '../../assets/Kebijakan.png';
 import threeLogo from '../../assets/Leaves.png';
 import fourLogo from '../../assets/Public.png';
-import seaImage from '../../assets/Undersea.jpg';
-import Logo from '../../assets/Logo BOL - Text.png';
-import beachImage from '../../assets/Beach.jpg';
-import '../../styles/Main.css';
-import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -75,6 +76,9 @@ const Main = () => (
     </div>
     <BitAboutSection {...bitAbout} />
     <ProgramSection />
+    <QuotesSection />
+    <FooterSection />
+    <p className="copyright">2023 - Bring Oceans Life by Group N. All Rights Reserved. Made With Love. </p>
   </div>
 );
 
@@ -161,6 +165,83 @@ const programs = [
     logo: 'Public.png',
     title: 'KEKUATAN MASYARAKAT',
     description: 'Memberdayakan ekonomi masyarakat melalui pemanfaatan sumberdaya pesisir dan laut secara berkelanjutan. Program ini bertujuan menciptakan kemandirian ekonomi dan meningkatkan kesejahteraan masyarakat lokal.',
+  },
+];
+
+const QuotesSection = () => (
+  <section id="quotes" className="quotes-section">
+    <div className="quote-box">
+      <blockquote>
+      Kami membutuhkan dukungan Anda untuk mendukung upaya kami dalam Pendidikan, 
+      Aktivisme, dan Ilmu Pengetahuan, untuk Membantu Meningkatkan Kesehatan Lingkungan
+      Laut dan Penghentian Polusi Plastik.
+      </blockquote>
+      <p className="author">Bring Oceans Life</p>
+      <p className="about">
+        "Bersama-sama kita ciptakan gelombang perubahan untuk membangun planet yang lebih sehat dan adil bagi semua."
+        <br />
+        <br />
+        <div className="donateBtn2">
+          <a href="#Donate" className="btnC">
+            DONATE
+          </a>
+        </div>
+      </p>
+    </div>
+  </section>
+);
+
+const FooterSection = () => (
+  <section id="footer">
+    <div className="footer">
+      <div className="row">
+        {footerColumns.map((column, index) => (
+          <div key={index} className="footer-col">
+            <h4>{column.title}</h4>
+            <ul>
+              {column.links.map((link, linkIndex) => (
+                <li key={linkIndex}>
+                  <a href={`#${link.key}`}>{link.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const footerColumns = [
+  {
+    title: 'Regulation',
+    links: [
+      { key: 'T&C', label: 'Terms & Condition' },
+      { key: 'FAQ', label: 'Frequently Asked Questions' },
+      { key: 'PP', label: 'Privacy Policy' },
+    ],
+  },
+  {
+    title: 'Developers',
+    links: [
+      { key: 'FD', label: 'Forum Diskusi' },
+      { key: 'T', label: 'Tribute' },
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      { key: 'TK', label: 'Tentang Kami' },
+      { key: 'EI', label: 'Events dan Info' },
+    ],
+  },
+  {
+    title: 'Kontak Kami',
+    links: [
+      { key: '-', label: 'Primary : 0896-4974-35' },
+      { key: '-', label: 'Primary : learning@edufree.com' },
+      { key: '-', label: 'Secondary : jakarta@edufree.com' },
+    ],
   },
 ];
 

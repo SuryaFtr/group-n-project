@@ -228,3 +228,99 @@
   font-size: 15px;
   font-weight: bold;
 }
+
+/* Quotes */
+
+.quotes-section .author {
+  font-size: 16px;
+  color: #02C7DA;
+}
+
+.quotes-section .about {
+  font-size: 18px;
+  color: white;
+  padding: 0px 200px;
+}
+
+.donateBtn2 {
+  display: inline-block;
+  background-color: #00839C;
+  border-radius: 8px;
+  transition: background-color 0.4s ease-in-out;
+  padding: 10px 50px;
+}
+
+.donateBtn2:hover {
+  background-color: #02C7DA;
+}
+
+.quotes-section .quote-box .btnC {
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+}
+
+.quotes-section blockquote {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: white;
+  padding: 0px 10px;
+}
+
+.quotes-section .quote-box {
+  padding: 30px 30px;
+  text-align: center;
+  width: 1100px;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  background: #1C7947;
+}
+
+/* Footer */
+
+#footer {
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  background-color: #00839C;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer-col {
+  margin: 0px;
+  padding: 0px 80px;
+  text-align: left;
+}
+
+.footer-col h4 {
+  margin-bottom: 10px;
+  color: white;
+  font-size: 18px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li a {
+  text-decoration: none;
+  color: #fff;
+}
+
+ul li a:hover {
+  color: #ddd;
+}
+
+.copyright {
+  text-align: center;
+  font-size: 10px;
+  color: #00839C;
+}
