@@ -1,0 +1,326 @@
+.nav {
+  position: fixed;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  z-index: 9999;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.usLogo {
+  display: flex;
+  align-items: center;
+}
+
+.usLogo img {
+  height: 70px;
+  padding: 0px 0px 0px 20px;
+}
+
+.nav > .desktop > li {
+  display: inline-block;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0px 16px;
+  position: relative;
+}
+
+.nav > .desktop > li > a {
+  position: relative;
+  text-decoration: none;
+  color: #00839C;
+  font-size: 18px;
+}
+
+.nav > .desktop > li > a::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: #00839C;
+  transform: scaleX(0);
+  transform-origin: bottom center;
+  transition: transform 0.4s ease-in-out;
+}
+
+.nav > .desktop > li > a:hover {
+  color: #1C7947;
+}
+
+.nav > .desktop > li > a:hover::after {
+  background-color: #1C7947;
+  transform: scaleX(1);
+  transform-origin: bottom center;
+}
+
+.donateBtn {
+  position: absolute;
+  right: 32px;
+  background-color: #00839C;
+  padding: 5px 15px;
+  border-radius: 8px;
+  transition: background-color 0.4s ease-in-out;
+}
+
+.donateBtn:hover {
+  background-color: #1C7947;
+}
+
+.btnA {
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+}
+
+/* Main Page */
+
+.main-page {
+  text-align: center;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: content-box !important;
+}
+
+.background-image {
+  width: 100%;
+  filter: brightness(0.6);
+}
+
+.content {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.title {
+  font-size: 40px;
+  margin-bottom: 10px;
+  color: #02C7DA;
+}
+
+.title span {
+  color: #02C7DA;
+}
+
+.description {
+  font-size: 16px;
+  margin-bottom: 30px;
+  max-width: 670px;
+}
+
+.moreBtn {
+  display: inline-block;
+  background-color: #00839C;
+  border-radius: 8px;
+  transition: background-color 0.4s ease-in-out;
+  padding: 10px 50px;
+}
+
+.moreBtn:hover {
+  background-color: #1C7947;
+}
+
+.btnB {
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+}
+
+/* Bit About */
+
+.bit-about-section {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center; 
+  margin: 0px 100px 100px;
+}
+
+.bit-about-content {
+  text-align: left;
+  z-index: 1;
+  position: relative;
+}
+
+.bit-about-content h4 {
+  font-size: 49px;
+  margin-bottom: 10px;
+  color: #00839C;
+}
+
+.bit-about-content p {
+  font-family: 'Poppins-Regular.ttf';
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
+.bit-about-content .moreBtn {
+  display: inline-block;
+  background-color: #00839C;
+  border-radius: 8px;
+  transition: background-color 0.4s ease-in-out;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+}
+
+.bit-about-content .moreBtn:hover {
+  background-color: #1C7947;
+}
+
+.bit-about-image {
+  text-align: center;
+}
+
+.bit-about-image img {
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+/* Program */
+#program h1 {
+  font-size: 40px;
+  text-align: center;
+  color: white;
+}
+
+.program-section {
+  margin-top: 20px;
+  background-color: #00839C;
+  padding: 10px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 50px;
+  font-size: 16px;
+  font-family: 'Poppins-Regular.ttf';
+  grid-gap: 30px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+  border-radius: 24px;
+  background-color: #1C7947;
+  color: white;
+}
+
+.item img {
+  width: 80px;
+}
+
+.item span {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* Quotes */
+
+.quotes-section .author {
+  font-size: 16px;
+  color: #02C7DA;
+}
+
+.quotes-section .about {
+  font-size: 18px;
+  color: white;
+  padding: 0px 200px;
+}
+
+.donateBtn2 {
+  display: inline-block;
+  background-color: #00839C;
+  border-radius: 8px;
+  transition: background-color 0.4s ease-in-out;
+  padding: 10px 50px;
+}
+
+.donateBtn2:hover {
+  background-color: #02C7DA;
+}
+
+.quotes-section .quote-box .btnC {
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+}
+
+.quotes-section blockquote {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: white;
+  padding: 0px 10px;
+}
+
+.quotes-section .quote-box {
+  padding: 30px 30px;
+  text-align: center;
+  width: 1100px;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  background: #1C7947;
+}
+
+/* Footer */
+
+#footer {
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  background-color: #00839C;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer-col {
+  margin: 0px;
+  padding: 0px 80px;
+  text-align: left;
+}
+
+.footer-col h4 {
+  margin-bottom: 10px;
+  color: white;
+  font-size: 18px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li a {
+  text-decoration: none;
+  color: #fff;
+}
+
+ul li a:hover {
+  color: #ddd;
+}
+
+.copyright {
+  text-align: center;
+  font-size: 10px;
+  color: #00839C;
+}

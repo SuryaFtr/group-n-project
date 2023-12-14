@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { TextField, Button, Typography, Link, Card } from '@mui/material';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { showAlert, API_BASE_URL } from '../function';
+import axios from 'axios';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -11,8 +11,27 @@ const LoginForm = () => {
 
     const handleRegisterLinkClick = (e) => {
         e.preventDefault();
-        navigate('/');
+        navigate('/register');
     }
+
+    const handleLoginError = (error) => {
+        if (error.response) {
+            if (error.response.status === 422 && error.response.data.errors) {
+                handleValidationErrors(error.response.data.errors);
+            } else {
+                handleOtherErrors();
+            }
+        }
+    };
+
+    const handleValidationErrors = (validationErrors) => {
+        const errorMessage = validationErrors.map((error) => `<b>${error.param}</b>: ${error.msg}`).join('<br>');
+        showAlert('error', 'Login Failed', errorMessage);
+    };
+
+    const handleOtherErrors = () => {
+        showAlert('error', 'Login Failed', `<b>[CODE] </b><br>An error occurred during login. Please try again later`);
+    };
 
     const handleLogin = async () => {
         try {
@@ -27,6 +46,7 @@ const LoginForm = () => {
             showAlert('success', 'Successfully log in', '');
             navigate('/homepage');
         } catch (error) {
+<<<<<<< HEAD
             if (error.response && error.response.status === 422 && error.response.data.errors) {
                 
                 const validationErrors = error.response.data.errors;
@@ -37,6 +57,9 @@ const LoginForm = () => {
             } else {
                 showAlert('error', 'Login Failed', `<b>[CODE] </b><br>An error occurred during login. Please try again later`);
             }
+=======
+            handleLoginError(error);
+>>>>>>> d6ff0e4a112d43bc4c5bc95065ac450c3403bdac
             console.error('Login error', error.message);
         }
     };
