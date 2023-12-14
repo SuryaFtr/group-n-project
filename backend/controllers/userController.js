@@ -214,19 +214,5 @@ exports.removeUserRole = async (req, res) => {
 }
 
 exports.deleteUser = async (req, res) => {
-    const { id } = req.params;
-    const getById = await UserMongo.findOne({ _id: id });
-
-    if (!getById) {
-        res.status(401).json({ error: "User is Not Found" });
-        return;
-    }
-
-    if (getById) {
-        await UserMongo.deleteOne({ _id: id });
-        res.status(201).json({ message: "User is successfully deleted" })
-    } else {
-        res.status(401).json({ error: "Error occured during delete process" });
-        return;
-    }
+    res.send('Hello, this is deleteUser!');
 }
