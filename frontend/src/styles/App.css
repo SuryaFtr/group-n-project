@@ -1,0 +1,14 @@
+@font-face {
+    font-family: PoppinsSB;
+    src: url(../fonts/PoppinsSB.ttf);
+  }
+  
+  @font-face {
+    font-family: PoppinsRG;
+    src: url(../fonts/Poppins-Regular.ttf);
+  }
+  
+  body {
+    font-family: PoppinsSB;
+    margin: 0;
+  }
