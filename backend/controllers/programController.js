@@ -23,3 +23,9 @@ exports.createProgram = async (req, res) => {
     await program.save();
     res.status(201).json({ message: "Program successfully created" });
 }
+
+exports.getAllProgram = async (req, res) => {
+    const program = await Program.find().select("-__v");
+
+    res.status(200).json(program);
+}
