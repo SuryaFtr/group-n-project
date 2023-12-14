@@ -1,11 +1,12 @@
 const { check, validationResult } = require('express-validator');
+const moment = require('moment');
 
 exports.validateRegister = [
     check('email', 'Email can not be empty').not().isEmpty(),
     check('email', 'Invalid email')
         .isEmail(),
     check('username', 'Username can not be empty').not().isEmpty(),
-    check('username', 'Name length should be 2 to 20 characters')
+    check('username', 'Username length should be 2 to 20 characters')
         .isLength({ min: 2, max: 20 }),
     check('password', 'Password can not be empty').not().isEmpty(),
     check('password', 'Password length min should be 8 characters')
@@ -22,7 +23,7 @@ exports.validateRegister = [
 
 exports.validateLogin = [
     check('username', 'Username can not be empty').not().isEmpty(),
-    check('username', 'Name length should be 2 to 20 characters')
+    check('username', 'Username length should be 2 to 20 characters')
         .isLength({ min: 2, max: 20 }),
     check('password', 'Password can not be empty').not().isEmpty(),
     check('password', 'Password length min should be 8 characters')
@@ -50,7 +51,7 @@ exports.validateUpdateUserData = [
     check('email', 'Invalid email')
         .isEmail(),
     check('username', 'Username can not be empty').not().isEmpty(),
-    check('username', 'Name length should be 2 to 20 characters')
+    check('username', 'Username length should be 2 to 20 characters')
         .isLength({ min: 2, max: 20 }),
     check('firstName', 'First Name length should be 2 to 20 characters')
         .isLength({ min: 2, max: 20 }),
@@ -69,3 +70,36 @@ exports.validateUpdateUserData = [
         next();
     },
 ]
+
+exports.validateProgram = [
+    check('pictureLink', 'Picture can not be empty').not().isEmpty(),
+    check('title', 'Title can not be empty').not().isEmpty(),
+    check('title', 'Title length should not be more than 100 characters')
+        .isLength({ max: 100 }),
+    check('programDate', 'Program Date can not be empty').not().isEmpty(),
+    check('programDate')
+        .isDate()
+        .withMessage('Invalid date format')
+        .custom((value) => {
+            const currentDate = moment();
+            const inputDate = moment(value, 'YYYY-MM-DD', true); // Adjust the format accordingly
+
+            if (!inputDate.isValid()) {
+                throw new Error('Invalid date format. Use YYYY-MM-DD');
+            }
+
+            // Check if the input date is at least 1 day from the current date
+            if (inputDate.diff(currentDate, 'days') < 1) {
+                throw new Error('Date must be at least 1 day from the current date');
+            }
+
+            return true;
+        }),
+    (req, res, next) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty())
+            return res.status(422).json({ errors: errors.array() });
+        next();
+    },
+]
+

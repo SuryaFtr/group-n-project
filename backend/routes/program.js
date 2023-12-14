@@ -3,17 +3,19 @@ const permission = require("../permissions");
 const { Router } = require("express");
 const router = Router();
 
+const { validateProgram } = require('../middleware/validator');
 
-//create program (admin & staff)
-router.post("/");
-//get all user
+
+//create program (staff)
+router.post("", permission.is_adminOrStaff, validateProgram, programController.createProgram);
+//get all program
 router.get("");
-//get user by id
+//get program by id
 router.get("/:id");
-//update user data (admin & staff)
-router.put("/:id");
-//delete user (admin & staff)
-router.delete("/:id");
+//update program (admin & staff)
+router.put("/:id", permission.is_adminOrStaff);
+//delete program (admin & staff)
+router.delete("/:id", permission.is_adminOrStaff);
 
 
 module.exports = router;

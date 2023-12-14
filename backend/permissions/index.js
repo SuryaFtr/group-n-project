@@ -37,3 +37,15 @@ exports.is_member = async (req, res, next) => {
         next();
     });
 };
+
+exports.is_adminOrStaff = async (req, res, next) => {
+    await exports.is_authenticated(req, res, async () => {
+        const isAdmin = await req.user.is_admin();
+        const isStaff = await req.user.is_staff();
+        if (!isAdmin && !isStaff) {
+            res.status(403).json({ error: "Not authorized" });
+            return;
+        }
+        next();
+    });
+};
