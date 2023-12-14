@@ -9,7 +9,7 @@ const { validateProgram } = require('../middleware/validator');
 //create program (staff)
 router.post("", permission.is_adminOrStaff, validateProgram, programController.createProgram);
 //get all program
-router.get("");
+router.get("", programController.getAllProgram);
 //get program by id
 router.get("/:id");
 //update program (admin & staff)
