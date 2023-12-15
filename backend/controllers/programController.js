@@ -94,3 +94,21 @@ exports.updateProgram = async (req, res) => {
         return;
     }
 }
+
+exports.deleteProgram = async (req, res) => {
+    const { id } = req.params;
+    const getById = await Program.findOne({ _id: id });
+
+    if (!getById) {
+        res.status(401).json({ error: "Program is Not Found" });
+        return;
+    }
+
+    if (getById) {
+        await Program.deleteOne({ _id: id });
+        res.status(201).json({ message: "Program Successfully Deleted" })
+    } else {
+        res.status(401).json({ error: "Error occured during delete process" });
+        return;
+    }
+}
