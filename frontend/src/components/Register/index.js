@@ -1,14 +1,8 @@
 import { useState } from 'react';
 import { TextField, Button, Typography, Link, Card } from '@mui/material';
-<<<<<<< HEAD
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { showAlert, API_BASE_URL } from '../function';
-=======
 import { useNavigate } from 'react-router-dom';
 import { showAlert, API_BASE_URL } from '../function';
 import axios from 'axios';
->>>>>>> d6ff0e4a112d43bc4c5bc95065ac450c3403bdac
 
 function Register() {
     const [email, setEmail] = useState('');
@@ -34,21 +28,11 @@ function Register() {
             navigate('/login');
         } catch (error) {
             if (error.response && error.response.status === 422 && error.response.data.errors) {
-<<<<<<< HEAD
-                
-                const validationErrors = error.response.data.errors;
-
-                const errorMessage = validationErrors.map((error) => `<b>${error.param}</b>: ${error.msg}`).join('<br>');
-                showAlert('error', 'Registration Failed', errorMessage);
-            } else {
-                showAlert('error', 'Registration Failed', '<b>[CODE] </b><br>An error occurred during registration. Please try again later');
-=======
                 const validationErrors = error.response.data.errors;
                 const errorMessage = validationErrors.map((error) => `${error.msg}`).join('<br>');
                 showAlert('error', 'Registration Failed', errorMessage);
             } else {
                 showAlert('error', 'Registration Failed', 'An error occurred during registration. Please check your input and try again.');
->>>>>>> d6ff0e4a112d43bc4c5bc95065ac450c3403bdac
             }
             console.error('Registration error', error.message);
         }
