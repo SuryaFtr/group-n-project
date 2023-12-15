@@ -11,7 +11,7 @@ router.get("/profile", permission.is_authenticated, userController.getUserProfil
 //update user data (admin, staff & member) 
 router.put("/profile", permission.is_authenticated, validateUpdateUserData, userController.updateUserData);
 //update user password (admin, staff & member) 
-router.put("/update-password/:id", permission.is_authenticated, userController.updateUserPassword);
+router.put("/update-password", permission.is_authenticated, userController.updateUserPassword);
 
 //get all user (admin)
 router.get("", permission.is_admin, userController.getAllUser);
