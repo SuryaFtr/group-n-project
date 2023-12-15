@@ -42,3 +42,55 @@ exports.getProgramById = async (req, res) => {
 
     res.status(200).json(program);
 }
+
+exports.updateProgram = async (req, res) => {
+    const {
+        pictureLink,
+        title,
+        description,
+        programDate
+    } = req.body;
+
+    const { id } = req.params;
+    let query = { _id: id };
+
+    const checkData = await Program.findOne(query);
+
+    if (!checkData) {
+        res.status(401).json({ error: "Program is Not Found" });
+        return;
+    }
+    let UpdateRequest = {}
+
+    const checkTitle = await Program.findOne({ title: title });
+    if (checkTitle) {
+
+        UpdateRequest = {
+            pictureLink,
+            description,
+            programDate
+        }
+    }
+    else {
+
+        UpdateRequest = {
+            pictureLink,
+            title,
+            description,
+            programDate
+        }
+    }
+
+    if (checkData) {
+        const update = await Program.updateOne({ _id: id }, { $set: UpdateRequest });
+        if (update.modifiedCount >= 1) {
+            res.status(201).json({ message: "Program Successfully Updated" });
+        } else {
+            res.status(200).json({ message: "Nothing updated" });
+        }
+
+    } else {
+        res.status(401).json({ error: "Error occured during update process" });
+        return;
+    }
+}
