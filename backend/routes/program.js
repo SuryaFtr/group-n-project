@@ -11,7 +11,7 @@ router.post("", permission.is_adminOrStaff, validateProgram, programController.c
 //get all program
 router.get("", programController.getAllProgram);
 //get program by id
-router.get("/:id");
+router.get("/:id", programController.getProgramById);
 //update program (admin & staff)
 router.put("/:id", permission.is_adminOrStaff);
 //delete program (admin & staff)
