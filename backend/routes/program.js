@@ -15,7 +15,7 @@ router.get("/:id", programController.getProgramById);
 //update program (admin & staff)
 router.put("/:id", permission.is_adminOrStaff, validateProgram, programController.updateProgram);
 //delete program (admin & staff)
-router.delete("/:id", permission.is_adminOrStaff);
+router.delete("/:id", permission.is_adminOrStaff, programController.deleteProgram);
 
 
 module.exports = router;
