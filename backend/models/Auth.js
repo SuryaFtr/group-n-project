@@ -26,11 +26,15 @@ class Auth {
         const refreshExpireAt = Math.floor(new Date().setDate(new Date().getDate() + 7)); // 7 days
         const accesToken = jwt.sign({
             _id: user._id,
+            userName: user.username,
+            userRole: user.permissions[0].name,
             exp: expireAt,
             iat: Math.floor(Date.now())
         }, process.env.SECRET);
         const refreshToken = jwt.sign({
             _id: user._id,
+            userName: user.username,
+            userRole: user.permissions[0].name,
             iat: Math.floor(Date.now()),
             exp: refreshExpireAt,
 
