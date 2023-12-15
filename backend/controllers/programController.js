@@ -29,3 +29,16 @@ exports.getAllProgram = async (req, res) => {
 
     res.status(200).json(program);
 }
+
+exports.getProgramById = async (req, res) => {
+    const { id } = req.params;
+
+    const program = await Program.findOne({ _id: id }).select("-__v");
+
+    if (!program) {
+        res.status(401).json({ error: "Program is Not Found" });
+        return;
+    }
+
+    res.status(200).json(program);
+}
