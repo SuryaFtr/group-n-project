@@ -46,7 +46,6 @@ const LoginForm = () => {
             showAlert('success', 'Successfully log in', '');
             navigate('/homepage');
         } catch (error) {
-<<<<<<< HEAD
             if (error.response && error.response.status === 422 && error.response.data.errors) {
                 
                 const validationErrors = error.response.data.errors;
@@ -57,9 +56,6 @@ const LoginForm = () => {
             } else {
                 showAlert('error', 'Login Failed', `<b>[CODE] </b><br>An error occurred during login. Please try again later`);
             }
-=======
-            handleLoginError(error);
->>>>>>> d6ff0e4a112d43bc4c5bc95065ac450c3403bdac
             console.error('Login error', error.message);
         }
     };
