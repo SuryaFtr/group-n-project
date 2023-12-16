@@ -21,10 +21,13 @@ exports.UserMongo = model("User", new Schema({
     email: { type: String, required: true, unique: true },
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    permissions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Permission' }]
+    permissions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Permission' }],
+    News: {
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'News' }],
+        default: [], 
+    }
 }, {
     methods: {
-        // usage user.has_perm("role")
         has_perm(name) {
             return this.permissions.filter((perm) => perm.name === name).length > 0;
         },
