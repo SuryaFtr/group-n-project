@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import '../../styles/Main.css';
 import Logo from '../../assets/Logo BOL - Text.png';
-import seaImage from '../../assets/Undersea.jpg';
 import beachImage from '../../assets/Beach.jpg';
+import vectorImage from '../../assets/Vector1.png';
 import oneLogo from '../../assets/Ekosistem.png';
 import twoLogo from '../../assets/Kebijakan.png';
 import threeLogo from '../../assets/Leaves.png';
@@ -14,11 +14,12 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const navLinks = {
-    program: '/program',
+    home: '/',
     about: '/about',
+    program: '/program',
+    news: '/news',
     contact: '/contact',
-    login: '/login',
-    donate: '/donate',
+    signIn: '/login',
   };
 
   const redirectTo = (path) => {
@@ -26,59 +27,64 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="nav">
-      <span className="usLogo">
-        <img src={Logo} alt="Logo" onClick={() => redirectTo('/')} style={{ cursor: 'pointer' }} />
-      </span>
-      <ul className="desktop">
-        <li onClick={() => redirectTo(navLinks.program)}>
-          <a href="#Program">OUR PROGRAM</a>
+    <header>
+      <a href={navLinks.home} className="logo" onClick={() => redirectTo(navLinks.home)}>
+        <img src={Logo} alt="Logo" />
+      </a>
+
+      <ul className="navbar">
+        <li onClick={() => redirectTo(navLinks.home)}>
+          <a href={navLinks.home} className="active">
+            Home
+          </a>
         </li>
         <li onClick={() => redirectTo(navLinks.about)}>
-          <a href="#About">ABOUT</a>
+          <a href={navLinks.about}>About</a>
+        </li>
+        <li onClick={() => redirectTo(navLinks.program)}>
+          <a href={navLinks.program}>Program</a>
+        </li>
+        <li onClick={() => redirectTo(navLinks.news)}>
+          <a href={navLinks.news}>News</a>
         </li>
         <li onClick={() => redirectTo(navLinks.contact)}>
-          <a href="#Contact">CONTACT</a>
-        </li>
-        <li onClick={() => redirectTo(navLinks.login)}>
-          <a href="#Login">LOGIN</a>
+          <a href={navLinks.contact}>Contact</a>
         </li>
       </ul>
-      <div className="donateBtn" onClick={() => redirectTo(navLinks.donate)}>
-        <a href="#Donate" className="btnA">
-          DONATE
+
+      <div className="main">
+        <a href={navLinks.signIn} className="user" onClick={() => redirectTo(navLinks.signIn)}>
+          Sign In
         </a>
       </div>
-    </nav>
+    </header>
   );
 };
 
 const Main = () => (
-  <div className="main-page">
+  <div>
+    <div className="home" id="home">
     <Navbar />
-    <img src={seaImage} alt="beach" className="background-image" />
-    <div className="content">
-      <h4 className="title">
-        BRING <span>OCEANS</span> LIFE
-      </h4>
-      <p className="description">
-        Selamat datang di Bring Oceans Life, platform berkomitmen pada perlindungan dan konservasi ekosistem pesisir dan laut.
-        Kami mendorong pemanfaatan berkelanjutan dan pemulihan ekosistem, serta mengutamakan manajemen berkelanjutan perikanan
-        skala kecil untuk melindungi ekosistem dan meningkatkan ekonomi lokal. Dengan inovasi ramah lingkungan di wilayah pesisir,
-        laut, dan pulau-pulau kecil, kami memberdayakan masyarakat untuk ikut serta dalam menjaga keberlanjutan. Bergabunglah bersama
-        kami membangun masa depan berkelanjutan, di mana harmoni antara manusia dan lingkungan menjadi kunci keberhasilan.
+    <div className="home-text">
+      <h1>Bring Oceans Life</h1>
+      <p>Selamat datang di Bring Oceans Life, platform berkomitmen pada perlindungan dan konservasi ekosistem pesisir dan laut.
+         Kami mendorong pemanfaatan berkelanjutan dan pemulihan ekosistem, serta mengutamakan manajemen berkelanjutan perikanan
+         skala kecil untuk melindungi ekosistem dan meningkatkan ekonomi lokal. Dengan inovasi ramah lingkungan di wilayah pesisir,
+         laut, dan pulau-pulau kecil, kami memberdayakan masyarakat untuk ikut serta dalam menjaga keberlanjutan. Bergabunglah bersama
+         kami membangun masa depan berkelanjutan, di mana harmoni antara manusia dan lingkungan menjadi kunci keberhasilan.
       </p>
-      <div className="moreBtn">
-        <a href="#More" className="btnB">
-          SELENGKAPNYA
-        </a>
+      <div className="button">
+        <a href="#About" className="btn">Selengkapnya</a>
       </div>
+    </div>
     </div>
     <BitAboutSection {...bitAbout} />
     <ProgramSection />
     <QuotesSection />
+    <NewsSection />
+    <DonateSection />
     <FooterSection />
-    <p className="copyright">2023 - Bring Oceans Life by Group N. All Rights Reserved. Made With Love. </p>
+    <p className="copyright">2023 - Bring Oceans Life by Group N. All Rights Reserved. Made With Love.</p>
   </div>
 );
 
@@ -88,7 +94,7 @@ const BitAboutSection = ({ title, content, buttonText, expImage }) => (
       <h4>{title}</h4>
       <p>{content}</p>
       <div className="moreBtn">
-        <a href="#More" className="btnB">
+        <a href="#About" className="btn1">
           {buttonText}
         </a>
       </div>
@@ -104,7 +110,7 @@ const bitAbout = {
   content:
     'Berawal dari komitmen terhadap pentingnya konservasi kawasan pesisir, laut dan pengelolaan pulau-pulau kecil, kami hadir untuk memberikan kontribusi melalui upaya-upaya pelestarian lingkungan hidup dan sumberdaya pesisir laut yang diusahakan dengan prinsip-prinsip pemberdayaan masyarakat dan riset.',
   buttonText: 'Selengkapnya',
-  expImage: beachImage,
+  expImage: vectorImage,
 };
 
 const ProgramSection = () => (
@@ -176,73 +182,80 @@ const QuotesSection = () => (
       Aktivisme, dan Ilmu Pengetahuan, untuk Membantu Meningkatkan Kesehatan Lingkungan
       Laut dan Penghentian Polusi Plastik.
       </blockquote>
-      <p className="author">Bring Oceans Life</p>
-      <p className="about">
-        "Bersama-sama kita ciptakan gelombang perubahan untuk membangun planet yang lebih sehat dan adil bagi semua."
-        <br />
-        <br />
-        <div className="donateBtn2">
-          <a href="#Donate" className="btnC">
+      <p className="author">BRING OCEANS LIFE</p>
+        <div className="donateBtn">
+          <a href="#Donate" className="btn2">
             DONATE
           </a>
         </div>
-      </p>
     </div>
   </section>
 );
+
+const NewsSection = () => (
+  <section id="news" className='news-section'>
+    <h1>NEWS</h1>
+      <div className="grid-container-4">
+        <div className="box-1">
+          <img src={beachImage} alt="Gambar 1" />
+          <a href="#link1">Section 1.10.33 of "de Finibus Bonorum et Malorum"....</a>
+        </div>
+        <div className="box-1">
+          <img src={beachImage} alt="Gambar 2" />
+          <a href="#link2">Section 1.10.33 of "de Finibus Bonorum et Malorum"....</a>
+        </div>
+        <div className="box-1">
+          <img src={beachImage} alt="Gambar 3" />
+          <a href="#link3">Section 1.10.33 of "de Finibus Bonorum et Malorum"....</a>
+        </div>
+      </div>
+  </section>
+);
+
+function DonateSection() {
+  return (
+      <section id="gabung">
+          <div className="box-gabung">
+              <p>"Bersama-sama kita ciptakan gelombang perubahan untuk membangun planet yang lebih sehat dan adil bagi semua."</p>
+                <div className="donateBtn1">
+                  <a href="#Donate" className="btn3">
+                    DONATE
+                  </a>
+                </div>
+          </div>
+      </section>
+  );
+}
 
 const FooterSection = () => (
   <section id="footer">
     <div className="footer">
       <div className="row">
-        {footerColumns.map((column, index) => (
-          <div key={index} className="footer-col">
-            <h4>{column.title}</h4>
-            <ul>
-              {column.links.map((link, linkIndex) => (
-                <li key={linkIndex}>
-                  <a href={`#${link.key}`}>{link.label}</a>
-                </li>
-              ))}
-            </ul>
+        <div className="footer-col" style={{ display: 'flex', alignItems: 'center' }}>
+          <div>
+            <img src={Logo} alt="Logo" style={{ width: '200px' }} />
           </div>
-        ))}
+        </div>
+        <div className="footer-col">
+          <h4>TENTANG KAMI</h4>
+          <ul>
+            <li><a href="#tentang-kami">Tentang Kami</a></li>
+            <li><a href="#program">Program</a></li>
+            <li><a href="#berita">Berita</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+          </ul>
+        </div>
+        <div className="footer-col">
+          <h4>KONTAK KAMI</h4>
+          <ul>
+            <li><p>Primary : 0896-4974-35</p></li>
+            <li><p>Primary : bringoceanslife@gmail.com</p></li>
+            <li><p>Secondary : oceanslife@gmail.com</p></li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 );
-
-const footerColumns = [
-  {
-    title: 'Regulation',
-    links: [
-      { key: 'T&C', label: 'Terms & Condition' },
-      { key: 'FAQ', label: 'Frequently Asked Questions' },
-      { key: 'PP', label: 'Privacy Policy' },
-    ],
-  },
-  {
-    title: 'Developers',
-    links: [
-      { key: 'FD', label: 'Forum Diskusi' },
-      { key: 'T', label: 'Tribute' },
-    ],
-  },
-  {
-    title: 'Company',
-    links: [
-      { key: 'TK', label: 'Tentang Kami' },
-      { key: 'EI', label: 'Events dan Info' },
-    ],
-  },
-  {
-    title: 'Kontak Kami',
-    links: [
-      { key: '-', label: 'Primary : 0896-4974-35' },
-      { key: '-', label: 'Primary : learning@edufree.com' },
-      { key: '-', label: 'Secondary : jakarta@edufree.com' },
-    ],
-  },
-];
 
 export default Main;
