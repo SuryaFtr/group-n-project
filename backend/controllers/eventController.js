@@ -43,3 +43,58 @@ exports.getEventById = async (req, res) => {
 
     res.status(200).json(event);
 }
+
+exports.updateEvent = async (req, res) => {
+    const {
+        pictureLink,
+        title,
+        description,
+        eventDate,
+        eventLink
+    } = req.body;
+
+    const { id } = req.params;
+    let query = { _id: id };
+
+    const checkData = await Event.findOne(query);
+
+    if (!checkData) {
+        res.status(401).json({ error: "Event is Not Found" });
+        return;
+    }
+    let UpdateRequest = {}
+
+    const checkTitle = await Event.findOne({ title: title });
+    if (checkTitle) {
+
+        UpdateRequest = {
+            pictureLink,
+            description,
+            eventDate,
+            eventLink
+        }
+    }
+    else {
+
+        UpdateRequest = {
+            pictureLink,
+            title,
+            description,
+            eventDate,
+            eventLink
+        }
+    }
+
+    if (checkData) {
+        const update = await Event.updateOne({ _id: id }, { $set: UpdateRequest });
+        if (update.modifiedCount >= 1) {
+            res.status(201).json({ message: "Event Successfully Updated" });
+        } else {
+            res.status(200).json({ message: "Nothing updated" });
+        }
+
+    } else {
+        res.status(401).json({ error: "Error occured during update process" });
+        return;
+    }
+}
