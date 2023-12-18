@@ -1,18 +1,19 @@
-const newsController = require("../controllers/newsController");
+const eventController = require("../controllers/eventController");
 const permission = require("../permissions");
 const { Router } = require("express");
 const router = Router();
 
+const { validateEvent } = require('../middleware/validator');
 
-//create program (admin & staff)
-router.post("/");
-//get all user
+//create event (admin & staff)
+router.post("", permission.is_adminOrStaff, validateEvent, eventController.createEvent);
+//get all events
 router.get("");
-//get user by id (admin, staff & member) 
+//get event by id (admin, staff & member) 
 router.get("/:id");
-//update user data (admin & staff)
+//update event (admin & staff)
 router.put("/:id");
-//delete user (admin & staff)
+//delete event (admin & staff)
 router.delete("/:id");
 
 
