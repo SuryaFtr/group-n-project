@@ -8,7 +8,7 @@ const { validateEvent } = require('../middleware/validator');
 //create event (admin & staff)
 router.post("", permission.is_adminOrStaff, validateEvent, eventController.createEvent);
 //get all events
-router.get("");
+router.get("", eventController.getAllEvent);
 //get event by id (admin, staff & member) 
 router.get("/:id");
 //update event (admin & staff)
