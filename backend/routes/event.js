@@ -14,7 +14,7 @@ router.get("/:id", permission.is_authenticated, eventController.getEventById);
 //update event (admin & staff)
 router.put("/:id", permission.is_adminOrStaff, validateEvent, eventController.updateEvent);
 //delete event (admin & staff)
-router.delete("/:id");
+router.delete("/:id", permission.is_adminOrStaff, eventController.deleteEvent);
 
 
 module.exports = router;
