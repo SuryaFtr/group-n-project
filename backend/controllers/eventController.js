@@ -98,3 +98,21 @@ exports.updateEvent = async (req, res) => {
         return;
     }
 }
+
+exports.deleteEvent = async (req, res) => {
+    const { id } = req.params;
+    const getById = await Event.findOne({ _id: id });
+
+    if (!getById) {
+        res.status(401).json({ error: "Event is Not Found" });
+        return;
+    }
+
+    if (getById) {
+        await Event.deleteOne({ _id: id });
+        res.status(201).json({ message: "Event Successfully Deleted" })
+    } else {
+        res.status(401).json({ error: "Error occured during delete process" });
+        return;
+    }
+}
