@@ -24,3 +24,9 @@ exports.createEvent = async (req, res) => {
     await event.save();
     res.status(201).json({ message: "Event successfully created" });
 }
+
+exports.getAllEvent = async (req, res) => {
+    const event = await Event.find().select("-__v");
+
+    res.status(200).json(event);
+}
