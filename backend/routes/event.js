@@ -10,7 +10,7 @@ router.post("", permission.is_adminOrStaff, validateEvent, eventController.creat
 //get all events
 router.get("", eventController.getAllEvent);
 //get event by id (admin, staff & member) 
-router.get("/:id");
+router.get("/:id", eventController.getEventById);
 //update event (admin & staff)
 router.put("/:id");
 //delete event (admin & staff)
