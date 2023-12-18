@@ -30,3 +30,16 @@ exports.getAllEvent = async (req, res) => {
 
     res.status(200).json(event);
 }
+
+exports.getEventById = async (req, res) => {
+    const { id } = req.params;
+
+    const event = await Event.findOne({ _id: id }).select("-__v");
+
+    if (!event) {
+        res.status(401).json({ error: "Event is Not Found" });
+        return;
+    }
+
+    res.status(200).json(event);
+}
