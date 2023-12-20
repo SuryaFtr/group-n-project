@@ -1,14 +1,14 @@
 @font-face {
-    font-family: PoppinsSB;
-    src: url(../fonts/PoppinsSB.ttf);
-  }
-  
-  @font-face {
-    font-family: PoppinsRG;
-    src: url(../fonts/Poppins-Regular.ttf);
-  }
+  font-family: PoppinsSB;
+  src: url(../fonts/PoppinsSB.ttf);
+}
 
-  body {
-    font-family: PoppinsSB;
-    margin: 0;
-  }
+@font-face {
+  font-family: PoppinsRG;
+  src: url(../fonts/Poppins-Regular.ttf);
+}
+
+body {
+  font-family: PoppinsSB, sans-serif;
+  margin: 0;
+}
