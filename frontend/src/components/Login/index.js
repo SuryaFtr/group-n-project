@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { TextField, Button, Typography, Link, Card } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { showAlert, API_BASE_URL } from '../function';
+import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
 
 const LoginForm = () => {
@@ -40,11 +41,20 @@ const LoginForm = () => {
                 password,
             });
 
-            const token = response.data.data;
-            localStorage.setItem('token', token);
+            const token = response.data;
+            localStorage.setItem('token', token.responseToken.accesToken);
             console.log('Login successful', response.data);
             showAlert('success', 'Successfully log in', '');
-            navigate('/homepage');
+
+            const accessToken = localStorage.getItem('token');
+            const decodeToken = jwtDecode(accessToken).userRole;
+
+            if (decodeToken === 'admin' || decodeToken === 'staff') {
+                navigate('/adminpanel');
+            } else {
+                navigate('/');
+            }
+
         } catch (error) {
             handleLoginError(error);
             console.error('Login error', error.message);

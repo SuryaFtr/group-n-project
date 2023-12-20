@@ -6,9 +6,9 @@ const router = express.Router();
 // Create News program (admin & staff)
 router.post("/", permission.is_adminOrStaff, newsController.createNews);
 // Get all News
-router.get("/", permission.is_authenticated, newsController.getAllNews);
+router.get("/", newsController.getAllNews);
 //Get by Id (admin & staff)
-router.get("/:id", permission.is_adminOrStaff, newsController.getById);
+router.get("/:id", newsController.getById);
 // Get My News
 router.get("/user/me", permission.is_adminOrStaff, newsController.getMyNews);
 // Remove News

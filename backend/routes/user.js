@@ -16,9 +16,9 @@ router.put("/update-password", permission.is_authenticated, userController.updat
 //get all user (admin)
 router.get("", permission.is_admin, userController.getAllUser);
 //get user by id (admin) 
-router.get("/:id", permission.is_admin, userController.getUserById);
+router.get("/:id", userController.getUserById);
 //update user data (admin) 
-router.put("/:id", permission.is_authenticated, validateUpdateUserData, userController.updateUserDataByAdmin);
+router.put("/:id", permission.is_admin, validateUpdateUserData, userController.updateUserDataByAdmin);
 //update user role (admin)
 router.put("/add-role/:id", permission.is_admin, validateUpdateUserRole, userController.addUserRole);
 //remove user role (admin)

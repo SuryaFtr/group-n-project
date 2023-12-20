@@ -64,19 +64,19 @@ const Navbar = () => {
 const Main = () => (
   <div>
     <div className="home" id="home">
-    <Navbar />
-    <div className="home-text">
-      <h1>Bring Oceans Life</h1>
-      <p>Selamat datang di Bring Oceans Life, platform berkomitmen pada perlindungan dan konservasi ekosistem pesisir dan laut.
-         Kami mendorong pemanfaatan berkelanjutan dan pemulihan ekosistem, serta mengutamakan manajemen berkelanjutan perikanan
-         skala kecil untuk melindungi ekosistem dan meningkatkan ekonomi lokal. Dengan inovasi ramah lingkungan di wilayah pesisir,
-         laut, dan pulau-pulau kecil, kami memberdayakan masyarakat untuk ikut serta dalam menjaga keberlanjutan. Bergabunglah bersama
-         kami membangun masa depan berkelanjutan, di mana harmoni antara manusia dan lingkungan menjadi kunci keberhasilan.
-      </p>
-      <div className="button">
-        <a href="#About" className="btn">Selengkapnya</a>
+      <Navbar />
+      <div className="home-text">
+        <h1>Bring Oceans Life</h1>
+        <p>Selamat datang di Bring Oceans Life, platform berkomitmen pada perlindungan dan konservasi ekosistem pesisir dan laut.
+          Kami mendorong pemanfaatan berkelanjutan dan pemulihan ekosistem, serta mengutamakan manajemen berkelanjutan perikanan
+          skala kecil untuk melindungi ekosistem dan meningkatkan ekonomi lokal. Dengan inovasi ramah lingkungan di wilayah pesisir,
+          laut, dan pulau-pulau kecil, kami memberdayakan masyarakat untuk ikut serta dalam menjaga keberlanjutan. Bergabunglah bersama
+          kami membangun masa depan berkelanjutan, di mana harmoni antara manusia dan lingkungan menjadi kunci keberhasilan.
+        </p>
+        <div className="button">
+          <a href="#About" className="btn">Selengkapnya</a>
+        </div>
       </div>
-    </div>
     </div>
     <BitAboutSection {...bitAbout} />
     <ProgramSection />
@@ -178,16 +178,16 @@ const QuotesSection = () => (
   <section id="quotes" className="quotes-section">
     <div className="quote-box">
       <blockquote>
-      Kami membutuhkan dukungan Anda untuk mendukung upaya kami dalam Pendidikan, 
-      Aktivisme, dan Ilmu Pengetahuan, untuk Membantu Meningkatkan Kesehatan Lingkungan
-      Laut dan Penghentian Polusi Plastik.
+        Kami membutuhkan dukungan Anda untuk mendukung upaya kami dalam Pendidikan,
+        Aktivisme, dan Ilmu Pengetahuan, untuk Membantu Meningkatkan Kesehatan Lingkungan
+        Laut dan Penghentian Polusi Plastik.
       </blockquote>
       <p className="author">BRING OCEANS LIFE</p>
-        <div className="donateBtn">
-          <a href="#Donate" className="btn2">
-            DONATE
-          </a>
-        </div>
+      <div className="donateBtn">
+        <a href="#Donate" className="btn2">
+          DONATE
+        </a>
+      </div>
     </div>
   </section>
 );
@@ -195,35 +195,35 @@ const QuotesSection = () => (
 const NewsSection = () => (
   <section id="news" className='news-section'>
     <h1>NEWS</h1>
-      <div className="grid-container-4">
-        <div className="box-1">
-          <img src={beachImage} alt="Gambar 1" />
-          <a href="#link1">Section 1.10.33 of "de Finibus Bonorum et Malorum"....</a>
-        </div>
-        <div className="box-1">
-          <img src={beachImage} alt="Gambar 2" />
-          <a href="#link2">Section 1.10.33 of "de Finibus Bonorum et Malorum"....</a>
-        </div>
-        <div className="box-1">
-          <img src={beachImage} alt="Gambar 3" />
-          <a href="#link3">Section 1.10.33 of "de Finibus Bonorum et Malorum"....</a>
-        </div>
+    <div className="grid-container-4">
+      <div className="box-1">
+        <img src={beachImage} alt="Gambar 1" />
+        <a href="#link1">Section 1.10.33 of "de Finibus Bonorum et Malorum"....</a>
       </div>
+      <div className="box-1">
+        <img src={beachImage} alt="Gambar 2" />
+        <a href="#link2">Section 1.10.33 of "de Finibus Bonorum et Malorum"....</a>
+      </div>
+      <div className="box-1">
+        <img src={beachImage} alt="Gambar 3" />
+        <a href="#link3">Section 1.10.33 of "de Finibus Bonorum et Malorum"....</a>
+      </div>
+    </div>
   </section>
 );
 
 function DonateSection() {
   return (
-      <section id="gabung">
-          <div className="box-gabung">
-              <p>"Bersama-sama kita ciptakan gelombang perubahan untuk membangun planet yang lebih sehat dan adil bagi semua."</p>
-                <div className="donateBtn1">
-                  <a href="#Donate" className="btn3">
-                    DONATE
-                  </a>
-                </div>
-          </div>
-      </section>
+    <section id="gabung">
+      <div className="box-gabung">
+        <p>"Bersama-sama kita ciptakan gelombang perubahan untuk membangun planet yang lebih sehat dan adil bagi semua."</p>
+        <div className="donateBtn1">
+          <a href="#Donate" className="btn3">
+            DONATE
+          </a>
+        </div>
+      </div>
+    </section>
   );
 }
 
