@@ -1,7 +1,7 @@
 {
-  "name": "group-n-final-project-revou-oceans-care-app-api",
+  "name": "group-n-final-project-revou-api",
   "version": "1.0.0",
-  "description": "Group N Final Project Revou, Oceans Care App restfull API",
+  "description": "Group N Final Project Revou, Bring Oceans Life App restfull API",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -9,7 +9,7 @@
     "test": "jest"
   },
   "keywords": [
-    "oceans-care-app",
+    "bring-oceans-life-app",
     "restfull",
     "api"
   ],
