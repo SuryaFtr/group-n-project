@@ -129,31 +129,56 @@ exports.removeNews = async (req, res) => {
     }
 };
 
+// update news (admin or staff)
 exports.updateNews = async (req, res) => {
     try {
         const { title, text, id } = req.body;
 
-        const updatedNews = await News.findByIdAndUpdate(id, { title, text }, { new: true });
+        const checkData = await News.findById(id);
+
+        if (!checkData) {
+            return res.status(404).json({ message: 'News not found' });
+        }
+
+        let updateRequest = {
+            title, 
+            text,
+        };
+
+        const checkTitle = await News.findOne({ title: title });
+
+        if (checkTitle) {
+            updateRequest = {
+                title,
+                text,
+            };
+        }
+
+        const updatedNews = await News.findByIdAndUpdate(id, updateRequest, { new: true });
 
         if (!updatedNews) {
-            return res.status(404).json({ message: 'News not found' });
+            return res.status(500).json({ message: 'Error occurred during update process' });
         }
 
         if (req.files && req.files.image) {
             let fileName = Date.now().toString() + req.files.image.name;
             const __dirname = path.dirname(require.main.filename);
 
-            req.files.image.mv(path.join(__dirname, '..', 'uploads', fileName));
+            req.files.image.mv(path.join(__dirname, '..', 'uploads', fileName), (err) => {
+                if (err) {
+                    console.error(err);
+                    return res.status(500).json({ message: 'Error occurred during file upload' });
+                }
 
-            updatedNews.imgUrl = fileName || '';
+                updatedNews.imgUrl = fileName || '';
+                updatedNews.save();
+                res.json(updatedNews);
+            });
+        } else {
+            res.json(updatedNews);
         }
-
-        await updatedNews.save();
-
-        res.json(updatedNews);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error.' });
     }
 };
-
