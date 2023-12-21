@@ -8,7 +8,16 @@
   src: url(../fonts/Poppins-Regular.ttf);
 }
 
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+  list-style: none;
+}
+
 body {
-  font-family: PoppinsSB, sans-serif;
+  min-height: 100vh;
+  background: white;
+  font-family: 'PoppinsSB.ttf';
   margin: 0;
 }
