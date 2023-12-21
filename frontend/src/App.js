@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import { Register, Login, Main } from "./components/index";
+import { Register, Login, Main, About, Program, Events, News } from "./components/index";
 import { Home, List, ListPrograms, New, NewProgram, Single, DetailProgram } from './pagesAdminPanel/index';
 
 import "./styles/App.css";
@@ -11,6 +11,10 @@ const App = () => {
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/program" element={<Program />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/news" element={<News />} />
         <Route path="/" element={<Main />} />
         <Route path="/adminpanel/">
           <Route index element={<Home />} />

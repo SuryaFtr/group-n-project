@@ -1,0 +1,28 @@
+.btn {
+    color: #006D82;
+    background-color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.btn:hover {
+  background-color: white;
+}
+
+.login {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 135px;
+    margin-left: 500px;
+    margin-right: 500px;
+    padding: 50px;
+    color: #006D82;
+    border-radius: 10px;
+}
+
+.teks {
+    font-family: "PoppinsSB.ttf";
+    color: white;
+}

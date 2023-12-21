@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { showAlert, API_BASE_URL } from '../function';
 import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
+import '../../styles/Login.css';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -62,39 +63,39 @@ const LoginForm = () => {
     };
 
     return (
-        <Card style={{ textAlign: 'center', margin: '90px auto', padding: '30px', maxWidth: '400px', color: '#265073', fontWeight: 'bold', borderRadius: '15px', boxShadow: '0 8px 11px rgba(0, 0.2, 0.3, 0.4)' }}>
-            <Typography variant="h4" gutterBottom style={{ marginBottom: '20px' }}>
-                LOGIN
-            </Typography>
-            <TextField
-                label="Username"
-                variant="filled"
-                fullWidth
-                margin="normal"
-                placeholder="Enter your username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
-            <TextField
-                label="Password"
-                type="password"
-                variant="filled"
-                fullWidth
-                margin="normal"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <Button variant="contained" color="primary" onClick={handleLogin} style={{ marginTop: '20px', borderRadius: '8px' }}>
-                Login
-            </Button>
-            <Typography style={{ marginTop: '10px', paddingTop: '10px', fontSize: '0.9rem' }}>
-                <Link href="#" onClick={handleRegisterLinkClick}>
-                    Register here if you don't have an account
-                </Link>
-            </Typography>
+        <Card className="login" style={{ backgroundColor: '#006D82' }}>
+          <Typography variant="h4" gutterBottom className="teks" style={{ marginBottom: '20px', fontFamily: 'PoppinsSB', color: 'white'}}>
+            LOGIN
+          </Typography>
+          <TextField style={{ backgroundColor: 'white' }}
+            label="Username"
+            variant="filled"
+            fullWidth
+            margin="normal"
+            placeholder="Enter your username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <TextField style={{ backgroundColor: 'white' }}
+            label="Password"
+            type="password"
+            variant="filled"
+            fullWidth
+            margin="normal"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button variant="contained" color="primary" onClick={handleLogin} style={{ color: '#006D82', backgroundColor: 'white', margin: '20px 0px', fontSize: '14px', padding: '5px 30px', borderRadius: '4px', fontFamily: 'PoppinsSB'}}>
+            Login
+          </Button>
+          <Typography style={{ fontSize: '12px', fontFamily: 'PoppinsSB', color: 'white'}}>
+            <Link href="#" onClick={handleRegisterLinkClick} className="teks" style={{ fontSize: '12px', color:'white', fontFamily: 'PoppinsSB'}}>
+              Register here if you don't have an account
+            </Link>
+          </Typography>
         </Card>
-    );
+      );
 }
 
 export default LoginForm;

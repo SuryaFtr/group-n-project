@@ -24,7 +24,6 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* background: #DFF2F9; */
   background: white;
   height: 80px; 
   padding: 0px 12%;
@@ -358,7 +357,7 @@ header {
   text-decoration: underline;
 }
 
-/* Donate */
+/* Join */
 
 .box-gabung {
   padding: 50px;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import '../../styles/Main.css';
@@ -13,17 +13,30 @@ import fourLogo from '../../assets/Public.png';
 const Navbar = () => {
   const navigate = useNavigate();
 
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('token');
+    setLoggedIn(accessToken !== null);
+  }, []);
+
   const navLinks = {
     home: '/',
     about: '/about',
     program: '/program',
     news: '/news',
-    contact: '/contact',
+    events: '/events',
     signIn: '/login',
   };
 
   const redirectTo = (path) => {
     navigate(path);
+  };
+
+  const handleSignButtonClick = () => {
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+    redirectTo(navLinks.home);
   };
 
   return (
@@ -34,9 +47,7 @@ const Navbar = () => {
 
       <ul className="navbar">
         <li onClick={() => redirectTo(navLinks.home)}>
-          <a href={navLinks.home} className="active">
-            Home
-          </a>
+          <a href={navLinks.home} className="active">Home</a>
         </li>
         <li onClick={() => redirectTo(navLinks.about)}>
           <a href={navLinks.about}>About</a>
@@ -44,66 +55,108 @@ const Navbar = () => {
         <li onClick={() => redirectTo(navLinks.program)}>
           <a href={navLinks.program}>Program</a>
         </li>
+        <li onClick={() => redirectTo(navLinks.events)}>
+          <a href={navLinks.events}>Events</a>
+        </li>
         <li onClick={() => redirectTo(navLinks.news)}>
           <a href={navLinks.news}>News</a>
-        </li>
-        <li onClick={() => redirectTo(navLinks.contact)}>
-          <a href={navLinks.contact}>Contact</a>
         </li>
       </ul>
 
       <div className="main">
-        <a href={navLinks.signIn} className="user" onClick={() => redirectTo(navLinks.signIn)}>
-          Sign In
-        </a>
+        {isLoggedIn ? (
+          <a href="#-" className="logout" onClick={handleSignButtonClick}>
+            Logout
+          </a>
+        ) : (
+          <a href={navLinks.signIn} className="user" onClick={() => redirectTo(navLinks.signIn)}>
+            Sign In
+          </a>
+        )}
       </div>
     </header>
   );
 };
 
-const Main = () => (
-  <div>
-    <div className="home" id="home">
-      <Navbar />
-      <div className="home-text">
-        <h1>Bring Oceans Life</h1>
-        <p>Selamat datang di Bring Oceans Life, platform berkomitmen pada perlindungan dan konservasi ekosistem pesisir dan laut.
-          Kami mendorong pemanfaatan berkelanjutan dan pemulihan ekosistem, serta mengutamakan manajemen berkelanjutan perikanan
-          skala kecil untuk melindungi ekosistem dan meningkatkan ekonomi lokal. Dengan inovasi ramah lingkungan di wilayah pesisir,
-          laut, dan pulau-pulau kecil, kami memberdayakan masyarakat untuk ikut serta dalam menjaga keberlanjutan. Bergabunglah bersama
-          kami membangun masa depan berkelanjutan, di mana harmoni antara manusia dan lingkungan menjadi kunci keberhasilan.
-        </p>
-        <div className="button">
-          <a href="#About" className="btn">Selengkapnya</a>
+const Main = () => {
+  const navigate = useNavigate();
+
+  const navLinks = {
+    home: '/',
+    about: '/about',
+    program: '/program',
+    news: '/news',
+    events: '/events',
+    signIn: '/login',
+  };
+
+  const redirectTo = (path) => {
+    navigate(path);
+  };
+
+  return (
+    <div>
+      <div className="home" id="home">
+        <Navbar />
+        <div className="home-text">
+          <h1>Bring Oceans Life</h1>
+          <p>Selamat datang di Bring Oceans Life, platform berkomitmen pada perlindungan dan konservasi ekosistem pesisir dan laut.
+            Kami mendorong pemanfaatan berkelanjutan dan pemulihan ekosistem, serta mengutamakan manajemen berkelanjutan perikanan
+            skala kecil untuk melindungi ekosistem dan meningkatkan ekonomi lokal. Dengan inovasi ramah lingkungan di wilayah pesisir,
+            laut, dan pulau-pulau kecil, kami memberdayakan masyarakat untuk ikut serta dalam menjaga keberlanjutan. Bergabunglah bersama
+            kami membangun masa depan berkelanjutan, di mana harmoni antara manusia dan lingkungan menjadi kunci keberhasilan.
+          </p>
+          <div className="button">
+            <a href={navLinks.about} className="btn" onClick={() => redirectTo(navLinks.about)}>
+              Selengkapnya
+            </a>
+          </div>
         </div>
       </div>
+      <BitAboutSection {...bitAbout} />
+      <ProgramSection />
+      <QuotesSection />
+      <NewsSection />
+      <JoinSection />
+      <FooterSection />
+      <p className="copyright">2023 - Bring Oceans Life by Group N. All Rights Reserved. Made With Love.</p>
     </div>
-    <BitAboutSection {...bitAbout} />
-    <ProgramSection />
-    <QuotesSection />
-    <NewsSection />
-    <DonateSection />
-    <FooterSection />
-    <p className="copyright">2023 - Bring Oceans Life by Group N. All Rights Reserved. Made With Love.</p>
-  </div>
-);
+  );
+};
 
-const BitAboutSection = ({ title, content, buttonText, expImage }) => (
-  <section className="bit-about-section">
-    <div className="bit-about-content">
-      <h4>{title}</h4>
-      <p>{content}</p>
-      <div className="moreBtn">
-        <a href="#About" className="btn1">
-          {buttonText}
-        </a>
+const BitAboutSection = ({ title, content, buttonText, expImage }) => {
+  const navigate = useNavigate();
+
+  const navLinks = {
+    home: '/',
+    about: '/about',
+    program: '/program',
+    news: '/news',
+    events: '/events',
+    signIn: '/login',
+  };
+
+  const redirectTo = (path) => {
+    navigate(path);
+  };
+
+  return (
+    <section className="bit-about-section">
+      <div className="bit-about-content">
+        <h4>{title}</h4>
+        <p>{content}</p>
+        <div className="moreBtn">
+          <a href={navLinks.about} className="btn1" onClick={() => redirectTo(navLinks.about)}>
+            {buttonText}
+          </a>
+        </div>
       </div>
-    </div>
-    <div className="bit-about-image">
-      <img src={expImage} alt="Bit About" />
-    </div>
-  </section>
-);
+      <div className="bit-about-image">
+        <img src={expImage} alt="Bit About" />
+      </div>
+    </section>
+  );
+};
 
 const bitAbout = {
   title: 'Conserving the Ocean for a Better Future',
@@ -174,8 +227,19 @@ const programs = [
   },
 ];
 
-const QuotesSection = () => (
-  <section id="quotes" className="quotes-section">
+const QuotesSection = () => {
+  const navigate = useNavigate();
+
+  const navLinks = {
+    signIn: '/login',
+  };
+
+  const redirectTo = (path) => {
+    navigate(path);
+  };
+  
+  return (
+    <section id="quotes" className="quotes-section">
     <div className="quote-box">
       <blockquote>
         Kami membutuhkan dukungan Anda untuk mendukung upaya kami dalam Pendidikan,
@@ -184,13 +248,14 @@ const QuotesSection = () => (
       </blockquote>
       <p className="author">BRING OCEANS LIFE</p>
       <div className="donateBtn">
-        <a href="#Donate" className="btn2">
-          DONATE
+        <a href={navLinks.signIn} className="btn2" onClick={() => redirectTo(navLinks.about)}>
+          JOIN US
         </a>
       </div>
     </div>
   </section>
-);
+  )
+};
 
 const NewsSection = () => (
   <section id="news" className='news-section'>
@@ -212,14 +277,24 @@ const NewsSection = () => (
   </section>
 );
 
-function DonateSection() {
+function JoinSection() {
+  const navigate = useNavigate();
+
+  const navLinks = {
+    signIn: '/login',
+  };
+
+  const redirectTo = (path) => {
+    navigate(path);
+  };
+
   return (
     <section id="gabung">
       <div className="box-gabung">
         <p>"Bersama-sama kita ciptakan gelombang perubahan untuk membangun planet yang lebih sehat dan adil bagi semua."</p>
         <div className="donateBtn1">
-          <a href="#Donate" className="btn3">
-            DONATE
+          <a href={navLinks.signIn} className="btn3" onClick={() => redirectTo(navLinks.about)}>
+            JOIN US
           </a>
         </div>
       </div>

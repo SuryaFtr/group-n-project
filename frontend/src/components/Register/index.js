@@ -3,6 +3,7 @@ import { TextField, Button, Typography, Link, Card } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { showAlert, API_BASE_URL } from '../function';
 import axios from 'axios';
+import '../../styles/Register.css';
 
 function Register() {
     const [email, setEmail] = useState('');
@@ -39,11 +40,11 @@ function Register() {
     };
 
     return (
-        <Card style={{ textAlign: 'center', margin: '90px auto', padding: '30px', maxWidth: '400px', color: '#265073', fontWeight: 'bold', borderRadius: '15px', boxShadow: '0 8px 11px rgba(0, 0.2, 0.3, 0.4)' }}>
-            <Typography variant="h4" gutterBottom style={{ marginBottom: '20px' }}>
+        <Card className="register" style={{ backgroundColor: '#006D82'}}>
+            <Typography variant="h4" gutterBottom style={{ marginBottom: '20px', fontFamily: 'PoppinsSB', color: 'white'}}>
                 REGISTER
             </Typography>
-            <TextField
+            <TextField style={{ backgroundColor: 'white' }}
                 label="Email"
                 variant="filled"
                 fullWidth
@@ -52,7 +53,7 @@ function Register() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
             />
-            <TextField
+            <TextField style={{ backgroundColor: 'white' }}
                 label="Username"
                 variant="filled"
                 fullWidth
@@ -61,7 +62,7 @@ function Register() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
             />
-            <TextField
+            <TextField style={{ backgroundColor: 'white' }}
                 label="Password"
                 type="password"
                 variant="filled"
@@ -71,11 +72,11 @@ function Register() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
-            <Button variant="contained" color="primary" onClick={handleRegister} style={{ marginTop: '20px', borderRadius: '8px' }}>
+            <Button variant="contained" color="primary" onClick={handleRegister} style={{ color: '#006D82', backgroundColor: 'white', margin: '20px 0px', fontSize: '14px', padding: '5px 30px', borderRadius: '4px', fontFamily: 'PoppinsSB'}}>
                 Register
             </Button>
-            <Typography style={{ marginTop: '10px', paddingTop: '10px', fontSize: '0.9rem' }}>
-                <Link href="#" onClick={handleLoginLinkClick}>
+            <Typography style={{ fontSize: '12px', fontFamily: 'PoppinsSB'}}>
+                <Link href="#" onClick={handleLoginLinkClick} style={{ fontSize: '12px', color:'white', fontFamily: 'PoppinsSB'}} className="teks">
                     Login here if you already have an account
                 </Link>
             </Typography>
