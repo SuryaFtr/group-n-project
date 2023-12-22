@@ -42,7 +42,7 @@ const ListEvents = () => {
                 setData(dataWithId);
             })
             .catch(error => {
-                alert.error('Error fetching data:', error);
+                alert('Error fetching data:' + error);
                 console.error('Error fetching data:', error);
             });
     };
