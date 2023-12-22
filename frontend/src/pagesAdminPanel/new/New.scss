@@ -34,7 +34,7 @@
         .right {
             flex: 2;
 
-            form {
+            .form {
                 display: flex;
                 flex-wrap: wrap;
                 gap: 30px;
@@ -62,7 +62,7 @@
                     }
                 }
 
-                button {
+                .button {
                     width: 150px;
                     padding: 10px;
                     border: none;

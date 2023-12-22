@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const app = express()
 
 const applyMiddleware = require('./middleware')
@@ -38,6 +39,8 @@ app.use((req, res, next) => {
 });
 
 applyMiddleware(app)
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 app.use("/api/v1/auth", authrouter)
 app.use("/api/v1/user", userrouter)
