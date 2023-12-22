@@ -1,7 +1,12 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { Register, Login, Main, About, Program, Events, News } from "./components/index";
-import { Home, List, ListPrograms, New, NewProgram, Single, DetailProgram } from './pagesAdminPanel/index';
+import {
+  Home,
+  List, ListPrograms, ListEvents,
+  New, NewProgram, NewEvent,
+  Single, DetailProgram, DetailEvent
+} from './pagesAdminPanel/index';
 
 import "./styles/App.css";
 
@@ -33,9 +38,9 @@ const App = () => {
             <Route path='new' element={<New />} />
           </Route>
           <Route path='events/'>
-            <Route index element={<List />} />
-            <Route path=':id' element={<Single />} />
-            <Route path='new' element={<New />} />
+            <Route index element={<ListEvents />} />
+            <Route path=':id' element={<DetailEvent />} />
+            <Route path='new' element={<NewEvent />} />
           </Route>
         </Route>
       </Routes>
