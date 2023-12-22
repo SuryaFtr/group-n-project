@@ -20,7 +20,7 @@ mongoose
 
 app.use((req, res, next) => {
     const allowedOrigins = [
-        '*'
+        'https://astounding-yeot-b597c1.netlify.app', 'http://localhost:3000', 'http://localhost:5173'
     ];
     const origin = req.headers.origin;
 
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
     if (allowedOrigins.includes(origin)) {
         res.header('Access-Control-Allow-Origin', origin);
 
-        if (origin === '*') {
+        if (origin === 'https://astounding-yeot-b597c1.netlify.app' || 'http://localhost:3000' || 'http://localhost:5173') {
             res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
         }
 
