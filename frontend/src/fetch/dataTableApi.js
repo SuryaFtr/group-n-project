@@ -27,3 +27,27 @@ export const programColumns = [
         },
     },
 ];
+
+export const eventColumns = [
+    { field: "id", headerName: "No", width: 60 },
+    {
+        field: "title",
+        headerName: "Title",
+        width: 140,
+    },
+    {
+        field: "description",
+        headerName: "Decription",
+        width: 280,
+    },
+    {
+        field: "eventDate",
+        headerName: "Event Date",
+        width: 130,
+    },
+    {
+        field: "eventLink",
+        headerName: "Event Link",
+        width: 220,
+    },
+];

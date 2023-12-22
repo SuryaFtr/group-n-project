@@ -95,22 +95,7 @@ exports.validateEvent = [
     check('eventDate', 'Event Date can not be empty').not().isEmpty(),
     check('eventDate')
         .isDate()
-        .withMessage('Invalid date format')
-        .custom((value) => {
-            const currentDate = moment();
-            const inputDate = moment(value, 'YYYY-MM-DD', true); // Adjust the format accordingly
-
-            if (!inputDate.isValid()) {
-                throw new Error('Invalid date format. Use YYYY-MM-DD');
-            }
-
-            // Check if the input date is at least 1 day from the current date
-            if (inputDate.diff(currentDate, 'days') < 1) {
-                throw new Error('Date must be at least 1 day from the current date');
-            }
-
-            return true;
-        }),
+        .withMessage('Invalid date format'),
     check('eventLink', 'Event link can not be empty').not().isEmpty(),
     (req, res, next) => {
         const errors = validationResult(req);

@@ -18,7 +18,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 
 
-const DetailProgram = () => {
+const DetailEvent = () => {
     const token = localStorage.getItem('token');
 
     const location = useLocation();
@@ -37,13 +37,14 @@ const DetailProgram = () => {
         pictureLink: '',
         title: '',
         description: '',
-        programDate: '',
+        eventDate: '',
+        eventLink: '',
     });
 
     // Function to fetch item data by ID
     const fetchItemById = async () => {
         try {
-            const response = await axios.get(`${API_BASE_URL}/api/v1/program/${id}`, {
+            const response = await axios.get(`${API_BASE_URL}/api/v1/event/${id}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 },
@@ -57,7 +58,7 @@ const DetailProgram = () => {
     const handleDateChange = (newDate) => {
         setItem((prevItem) => ({
             ...prevItem,
-            programDate: newDate,
+            eventDate: newDate,
         }));
     };
 
@@ -66,13 +67,14 @@ const DetailProgram = () => {
 
     const handleSubmit = async () => {
         try {
-            const progDate = item.programDate.toISOString().split('T')[0];
-            const response = await axios.put(`${API_BASE_URL}/api/v1/program/${id}`,
+            const eveDate = item.eventDate.toISOString().split('T')[0];
+            const response = await axios.put(`${API_BASE_URL}/api/v1/event/${id}`,
                 {
                     pictureLink: item.pictureLink,
                     description: item.description,
                     title: item.title,
-                    programDate: progDate,
+                    eventDate: eveDate,
+                    eventLink: item.eventLink,
                 },
                 {
                     headers: {
@@ -81,18 +83,18 @@ const DetailProgram = () => {
                     }
                 });
 
-            showAlert('success', 'Update Program Successful');
-            console.log('Update Program Successful', response.data);
-            navigate('/adminpanel/programs/');
+            showAlert('success', 'Update Event Successful');
+            console.log('Update Event Successful', response.data);
+            navigate('/adminpanel/events/');
         } catch (error) {
             if (error.response && error.response.status === 422 && error.response.data.errors) {
                 const validationErrors = error.response.data.errors;
                 const errorMessage = validationErrors.map((error) => `${error.msg}`).join('<br>');
-                showAlert('error', 'Update Program Failed', errorMessage);
+                showAlert('error', 'Update Event Failed', errorMessage);
             } else {
-                showAlert('error', 'Update Program Failed', 'An error occurred during submission. Please check your input and try again.', error.message);
+                showAlert('error', 'Update Event Failed', 'An error occurred during submission. Please check your input and try again.', error.message);
             }
-            console.error('Update Program error', error.message);
+            console.error('Update Event error', error.message);
         }
 
     };
@@ -110,7 +112,7 @@ const DetailProgram = () => {
                 <div className="singleContainer">
                     <Navbar />
                     <div className="top">
-                        <h1>Detail Program</h1>
+                        <h1>Detail Event</h1>
                     </div>
                     <div className="bottom">
                         <div className="left">
@@ -134,14 +136,14 @@ const DetailProgram = () => {
                                 </div>
                                 <div className="formInput">
                                     <label>Title</label>
-                                    <input type="text" placeholder='Program Title'
+                                    <input type="text" placeholder='Event Title'
                                         value={item.title}
                                         onChange={(e) => setItem({ ...item, title: e.target.value })}
                                     />
                                 </div>
                                 <div className="formInput">
                                     <label>Description</label>
-                                    <textarea rows={10} type="text" placeholder='Program Description'
+                                    <textarea rows={10} type="text" placeholder='Event Description'
                                         value={item.description}
                                         onChange={(e) => setItem({ ...item, description: e.target.value })}
                                     />
@@ -149,13 +151,20 @@ const DetailProgram = () => {
                                 <div className="formInput">
                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <DatePicker
-                                            label="Program Date"
-                                            value={dayjs(item.programDate)}
+                                            label="Event Date"
+                                            value={dayjs(item.eventDate)}
                                             onChange={handleDateChange}
                                             format="YYYY-MM-DD"
                                             textField={(params) => <TextField {...params} />}
                                         />
                                     </LocalizationProvider>
+                                </div>
+                                <div className="formInput">
+                                    <label>Link</label>
+                                    <input type="text" placeholder='Event Link'
+                                        value={item.eventLink}
+                                        onChange={(e) => setItem({ ...item, eventLink: e.target.value })}
+                                    />
                                 </div>
                                 <button onClick={handleSubmit} type='submit' className='button'> Update </button>
                             </div>
@@ -168,4 +177,4 @@ const DetailProgram = () => {
     return <Navigate to="/login" />
 }
 
-export default DetailProgram
+export default DetailEvent
