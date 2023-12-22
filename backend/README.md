@@ -1,4 +1,4 @@
-# group-n-project
+# GROUP N FINAL PROJECT 
 
 ## Getting Started
 
@@ -44,3 +44,20 @@ npm run make_perm
 ```bash
 npm start
 ```
+
+### 5. Authentication and EndPoint 
+| Controllers         | Routes                                      | Functionality                               |
+|---------------------|-------------------------------------------- |---------------------------------------------|
+| authController      | `/login, /register`                         | Authenticate login and regist account             |
+| eventController     | `/, /:id`                                   | To perform PUSH, GET, PUT, DEL events       |
+| newsController      | `/, /:id, /user/me`                         | To perform PUSH, GET, PUT, DEL news         |
+| programController   | `/, /:id`                                   | To perform PUSH, GET, PUT, DEL program      |
+| userController      | `/, /:id, /add-role/:id, /remove-role/:id`  | Ensure Role-Based Access Control (RBAC)     |
+
+### 6. Access Permissions 
+| Role   | Collection                   | Allowed Methods              |
+|--------|------------------------------|------------------------------|
+| admin  | users, event, news, program  | get, post, put, delete       |
+| staff  | event, news, program         | get, post, put, delete       |
+| member | users, event, news, program  | get                          |
+
