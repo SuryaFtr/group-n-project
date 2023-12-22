@@ -3,7 +3,7 @@ import { jwtDecode } from 'jwt-decode';
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+// import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import EventIcon from '@mui/icons-material/Event';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -47,12 +47,12 @@ const Sidebar = () => {
                     </Link>
                     <div className="sidemenu-title">LIST</div>
                     {handleRole()}
-                    <Link to='/adminpanel/programs/'>
+                    {/* <Link to='/adminpanel/programs/'>
                         <li>
                             <RemoveRedEyeIcon className='sidemenu-icon' />
                             <span>Programs</span>
                         </li>
-                    </Link>
+                    </Link> */}
                     <Link to='/adminpanel/news'>
                         <li>
                             <NewspaperIcon className='sidemenu-icon' />

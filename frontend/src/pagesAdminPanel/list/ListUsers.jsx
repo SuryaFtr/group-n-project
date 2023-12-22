@@ -7,9 +7,9 @@ import { API_BASE_URL } from '../../components/function';
 import './List.scss'
 import Sidebar from "../../components/AdminPanel/sidebar/Sidebar"
 import Navbar from "../../components/AdminPanel/navbar/Navbar"
-import TableEvents from '../../components/AdminPanel/datatable/TableEvents'
+import TableUsers from '../../components/AdminPanel/datatable/TableUsers'
 
-const ListEvents = () => {
+const ListUsers = () => {
     const token = localStorage.getItem('token');
 
     const location = useLocation();
@@ -31,8 +31,12 @@ const ListEvents = () => {
     }, []);
 
     const fetchData = () => {
-        // Fetch data event
-        axios.get(`${API_BASE_URL}/api/v1/event`)
+        // Fetch data user
+        axios.get(`${API_BASE_URL}/api/v1/user`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            },
+        })
             .then(response => {
                 // Add a unique id to each data item if it doesn't have one
                 const dataWithId = response.data.map((item, index) => ({
@@ -48,7 +52,7 @@ const ListEvents = () => {
     };
     const handleDelete = (id) => {
         // Perform DELETE request
-        axios.delete(`${API_BASE_URL}/api/v1/event/${id}`, {
+        axios.delete(`${API_BASE_URL}/api/v1/user/${id}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             },
@@ -58,7 +62,7 @@ const ListEvents = () => {
                 fetchData();
             })
             .catch(error => {
-                alert('Error deleting data: ' + error);
+                alert('Error deleting data' + error);
                 console.error('Error deleting data:', error);
             });
     };
@@ -71,7 +75,7 @@ const ListEvents = () => {
                 <Sidebar />
                 <div className="listContainer">
                     <Navbar />
-                    <TableEvents data={data} onDelete={handleDelete} />
+                    <TableUsers data={data} onDelete={handleDelete} />
                 </div>
             </div>
         )
@@ -79,4 +83,4 @@ const ListEvents = () => {
     return <Navigate to="/login" />
 }
 
-export default ListEvents
+export default ListUsers
