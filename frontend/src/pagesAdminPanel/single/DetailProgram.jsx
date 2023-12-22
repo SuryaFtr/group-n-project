@@ -4,7 +4,6 @@ import { useEffect, useState, useMemo } from 'react';
 import { Navigate, useNavigate, useLocation, useParams } from 'react-router-dom';
 import { showAlert, API_BASE_URL } from '../../components/function/index';
 import axios from 'axios';
-import moment from 'moment';
 import dayjs from 'dayjs';
 
 import './Single.scss'
@@ -99,7 +98,9 @@ const DetailProgram = () => {
     };
     // Fetch item data on component mount
     useEffect(() => {
+        // eslint-disable-next-line
         fetchItemById();
+        // eslint-disable-next-line
     }, [id]);
 
     if (isAuth) {
