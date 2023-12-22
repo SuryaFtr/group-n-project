@@ -1,4 +1,5 @@
 const express = require('express')
+const mongoose = require('mongoose')
 const path = require('path')
 const app = express()
 
@@ -12,11 +13,16 @@ const eventrouter = require('./routes/event')
 require('dotenv').config()
 const PORT = process.env.PORT || 3000
 
-const mongoose = require('mongoose')
-mongoose
-    .connect(process.env.MONGO_URL)
-    .then(() => console.log('Connected To MongoDB...'))
-    .catch((err) => console.log(err))
+
+const connectDB = async () => {
+    try {
+        const conn = await mongoose.connect(process.env.MONGO_URL);
+        console.log(`MongoDB Connected: ${conn.connection.host}`);
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
+}
 
 app.use((req, res, next) => {
     const allowedOrigins = [
@@ -48,8 +54,11 @@ app.use("/api/v1/program", programrouter)
 app.use("/api/v1/news", newsrouter)
 app.use("/api/v1/event", eventrouter)
 
-const server = app.listen(PORT, () => {
-    console.log('Server listening on port ' + PORT)
-});
+const server =
+    connectDB().then(() => {
+        app.listen(PORT, () => {
+            console.log("listening for requests");
+        })
+    })
 module.exports = server
 
