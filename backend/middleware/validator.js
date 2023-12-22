@@ -76,25 +76,9 @@ exports.validateProgram = [
     check('title', 'Title can not be empty').not().isEmpty(),
     check('title', 'Title length should not be more than 100 characters')
         .isLength({ max: 100 }),
-    check('programDate', 'Program Date can not be empty').not().isEmpty(),
     check('programDate')
         .isDate()
-        .withMessage('Invalid date format')
-        .custom((value) => {
-            const currentDate = moment();
-            const inputDate = moment(value, 'YYYY-MM-DD', true); // Adjust the format accordingly
-
-            if (!inputDate.isValid()) {
-                throw new Error('Invalid date format. Use YYYY-MM-DD');
-            }
-
-            // Check if the input date is the current date
-            if (inputDate.diff(currentDate, 'days')) {
-                throw new Error('Date must be at the current date');
-            }
-
-            return true;
-        }),
+        .withMessage('Invalid date format'),
     (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty())
