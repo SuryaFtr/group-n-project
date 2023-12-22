@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Register, Login, Main, About, Program, Events, News } from "./components/index";
 import {
   Home,
-  List, ListPrograms, ListEvents,
+  List, ListPrograms, ListEvents, ListUsers,
   New, NewProgram, NewEvent,
-  Single, DetailProgram, DetailEvent
+  Single, DetailProgram, DetailEvent, DetailUser, DetailUserRole
 } from './pagesAdminPanel/index';
 
 import "./styles/App.css";
@@ -24,8 +24,9 @@ const App = () => {
         <Route path="/adminpanel/">
           <Route index element={<Home />} />
           <Route path='users/'>
-            <Route index element={<List />} />
-            <Route path=':id' element={<Single />} />
+            <Route index element={<ListUsers />} />
+            <Route path=':id' element={<DetailUser />} />
+            <Route path='user-role/:id' element={<DetailUserRole />} />
           </Route>
           <Route path='programs/'>
             <Route index element={<ListPrograms />} />

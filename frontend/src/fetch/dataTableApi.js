@@ -1,4 +1,28 @@
 
+export const userColumns = [
+    { field: "id", headerName: "No", width: 60 },
+    {
+        field: "username",
+        headerName: "User Name",
+        width: 140,
+    },
+    {
+        field: "email",
+        headerName: "Email",
+        width: 280,
+    },
+    {
+        field: "permissions",
+        headerName: "Permission Role",
+        width: 130,
+        renderCell: (params) => {
+            return (
+                <>{params.row.permissions[0].name}</>
+            );
+        },
+    }
+];
+
 export const programColumns = [
     { field: "id", headerName: "No", width: 60 },
     {
