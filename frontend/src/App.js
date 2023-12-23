@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Register, Login, Main, About, Program, Events, News } from "./components/index";
 import {
   Home,
-  List, ListPrograms, ListEvents, ListUsers,
-  New, NewProgram, NewEvent,
+  ListPrograms, ListEvents, ListUsers, ListNews,
+  NewProgram, NewEvent, NewNews,
   Single, DetailProgram, DetailEvent, DetailUser, DetailUserRole
 } from './pagesAdminPanel/index';
 
@@ -34,9 +34,9 @@ const App = () => {
             <Route path='new' element={<NewProgram />} />
           </Route>
           <Route path='news/'>
-            <Route index element={<List />} />
+            <Route index element={<ListNews />} />
             <Route path=':id' element={<Single />} />
-            <Route path='new' element={<New />} />
+            <Route path='new' element={<NewNews />} />
           </Route>
           <Route path='events/'>
             <Route index element={<ListEvents />} />

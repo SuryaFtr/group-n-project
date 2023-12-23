@@ -4,9 +4,9 @@ const express = require('express');
 const router = express.Router();
 
 // Create News program (admin & staff)
-router.post("/", permission.is_adminOrStaff, newsController.createNews);
+router.post("", permission.is_adminOrStaff, newsController.createNews);
 // Get all News
-router.get("/", newsController.getAllNews);
+router.get("", newsController.getAllNews);
 //Get by Id (admin & staff)
 router.get("/:id", newsController.getById);
 // Get My News

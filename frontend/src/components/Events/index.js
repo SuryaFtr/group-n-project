@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
+import { API_BASE_URL } from '../../components/function';
 
 import '../../styles/Events.css';
 import Logo from '../../assets/Logo BOL - Text.png';
@@ -62,7 +63,7 @@ const Events = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/events');
+        const response = await axios.get(`${API_BASE_URL}/api/v1/event`);
         setEvents(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -100,47 +101,56 @@ const EventSection = ({ events, redirectToEventDetail }) => (
         </p>
       </div>
     ) : (
-      <ul>
-        {events.map((event) => (
-          <li key={event._id} onClick={() => redirectToEventDetail(event._id)}>
-            <h2>{event.title}</h2>
-            <p>{event.description}</p>
-          </li>
-        ))}
-      </ul>
+      <section id="events" className='events-section'>
+        <div className="grid-container-4">
+          {events.map((event) => (
+            <ul className="box-1">
+              <li>
+                <img src={event.pictureLink} alt="" />
+                <h2 key={event._id} onClick={() => redirectToEventDetail(event._id)}>
+                  {event.title}
+                </h2>
+                <p className='desc-text'>
+                  {event.description}
+                </p>
+              </li>
+            </ul>
+          ))}
+        </div>
+      </section>
     )}
   </section>
 );
 
 const FooterSection = () => (
-    <section id="footer">
-      <div className="footer">
-        <div className="row">
-          <div className="footer-col" style={{ display: 'flex', alignItems: 'center' }}>
-            <div>
-              <img src={Logo} alt="Logo" style={{ width: '200px' }} />
-            </div>
-          </div>
-          <div className="footer-col">
-            <h4>TENTANG KAMI</h4>
-            <ul>
-              <li><a href="#tentang-kami">Tentang Kami</a></li>
-              <li><a href="#program">Program</a></li>
-              <li><a href="#berita">Berita</a></li>
-              <li><a href="#kontak">Kontak</a></li>
-            </ul>
-          </div>
-          <div className="footer-col">
-            <h4>KONTAK KAMI</h4>
-            <ul>
-              <li><p>Primary : 0896-4974-35</p></li>
-              <li><p>Primary : bringoceanslife@gmail.com</p></li>
-              <li><p>Secondary : oceanslife@gmail.com</p></li>
-            </ul>
+  <section id="footer">
+    <div className="footer">
+      <div className="row">
+        <div className="footer-col" style={{ display: 'flex', alignItems: 'center' }}>
+          <div>
+            <img src={Logo} alt="Logo" style={{ width: '200px' }} />
           </div>
         </div>
+        <div className="footer-col">
+          <h4>TENTANG KAMI</h4>
+          <ul>
+            <li><a href="#tentang-kami">Tentang Kami</a></li>
+            <li><a href="#program">Program</a></li>
+            <li><a href="#berita">Berita</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+          </ul>
+        </div>
+        <div className="footer-col">
+          <h4>KONTAK KAMI</h4>
+          <ul>
+            <li><p>Primary : 0896-4974-35</p></li>
+            <li><p>Primary : bringoceanslife@gmail.com</p></li>
+            <li><p>Secondary : oceanslife@gmail.com</p></li>
+          </ul>
+        </div>
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 
 export default Events;

@@ -75,3 +75,17 @@ export const eventColumns = [
         width: 220,
     },
 ];
+
+export const newsColumns = [
+    { field: "id", headerName: "No", width: 60 },
+    {
+        field: "title",
+        headerName: "Title",
+        width: 150,
+    },
+    {
+        field: "text",
+        headerName: "Description",
+        width: 300,
+    },
+];

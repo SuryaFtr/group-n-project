@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 
-export const API_BASE_URL = 'https://tame-suspenders-newt.cyclic.app';
+export const API_BASE_URL = 'http://localhost:5000';
 
 export const getHeaders = () => {
   const token = localStorage.getItem('token');
